@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support Tickets – QuickWrks Customer Portal</title>
+  <link rel="stylesheet" href="support-tickets.css" />
+</head>
+<body>
+  <!--
+    Backend (Python):
+    - GET /api/tickets?status=all|open|in_progress|on_hold|resolved|closed&page=1
+    - POST /api/tickets            (create new ticket)
+    - GET /api/tickets/{id}        (ticket detail)
+    - Theme: user setting theme=light|dark (default light)
+  -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon">Q</div>
+      <div class="brand-text">
+        <strong>QuickWrks</strong>
+        <span>Customer Portal</span>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+      <li><a href="my-updates.html"><span class="nav-icon">🔔</span> My Updates</a></li>
+      <li><a href="invoices.html"><span class="nav-icon">📄</span> Invoices &amp; Payments</a></li>
+      <li><a href="transactions.html"><span class="nav-icon">↔️</span> Transactions</a></li>
+      <li><a href="support-tickets.html"><span class="nav-icon">💬</span> Support Tickets</a></li>
+      <li><a href="my-products.html"><span class="nav-icon">📦</span> My Products</a></li>
+      <li><a href="documents.html"><span class="nav-icon">📁</span> Documents</a></li>
+      <li><a href="settings.html"><span class="nav-icon">⚙️</span> Profile &amp; Settings</a></li>
+    </ul>
+
+    <div class="sidebar-help">
+      <h4>Need Help?</h4>
+      <p>We're here to assist you.</p>
+      <button class="btn-support" type="button">Create a New Ticket</button>
+    </div>
+    <div class="sidebar-footer">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeLabel">Dark mode</span>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </button>
+      <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="topbar-right">
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="company-select" type="button">
+          <span class="company-avatar">AC</span>
+          <span class="company-meta">
+            <strong>Aarav Corp. Ltd.</strong>
+            <span>Customer ID: CUST-100245</span>
+          </span>
+          <span>▾</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>Support Tickets</h1>
+        <p>View, track and manage all your support requests in one place.</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="all">All Tickets (7)</button>
+          <button type="button" class="tab" data-tab="open">Open (2)</button>
+          <button type="button" class="tab" data-tab="progress">In Progress (2)</button>
+          <button type="button" class="tab" data-tab="hold">On Hold (1)</button>
+          <button type="button" class="tab" data-tab="resolved">Resolved (2)</button>
+          <button type="button" class="tab" data-tab="closed">Closed (0)</button>
+        </div>
+        <div class="toolbar-actions">
+          <button type="button" class="btn-primary">⊕ Create New Ticket</button>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Total Tickets</div>
+            <div class="stat-value">7</div>
+            <div class="stat-sub">All time</div>
+          </div>
+          <div class="stat-icon green">🗒️</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Open Tickets</div>
+            <div class="stat-value">2</div>
+            <div class="stat-sub warning">Require your action</div>
+          </div>
+          <div class="stat-icon orange">⏳</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">In Progress</div>
+            <div class="stat-value">2</div>
+            <div class="stat-sub info">Being worked on</div>
+          </div>
+          <div class="stat-icon blue">◯</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Resolved</div>
+            <div class="stat-value">2</div>
+            <div class="stat-sub success">Last 30 days</div>
+          </div>
+          <div class="stat-icon purple">✓</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Closed</div>
+            <div class="stat-value">0</div>
+            <div class="stat-sub">Last 30 days</div>
+          </div>
+          <div class="stat-icon gray">📅</div>
+        </div>
+      </div>
+
+      <div class="layout-2">
+        <div>
+          <div class="panel">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Subject</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Updated On</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0057</div>
+                      <div class="tkt-sub">Created on 18 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Unable to download invoice</div>
+                      <div class="subject-desc">I am facing an issue while trying to download...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-billing">🧾</span> Billing &amp; Invoices</span></td>
+                    <td data-label="Status"><span class="badge-status badge-open">Open</span></td>
+                    <td data-label="Priority"><span class="priority high">↑ High</span></td>
+                    <td data-label="Updated On"><div class="updated-on">18 May 2025</div><div class="updated-time">10:30 AM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0056</div>
+                      <div class="tkt-sub">Created on 17 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Payment not reflecting</div>
+                      <div class="subject-desc">I have made a payment but it is not showing...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-payments">💳</span> Payments</span></td>
+                    <td data-label="Status"><span class="badge-status badge-progress">In Progress</span></td>
+                    <td data-label="Priority"><span class="priority high">↑ High</span></td>
+                    <td data-label="Updated On"><div class="updated-on">18 May 2025</div><div class="updated-time">09:15 AM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0055</div>
+                      <div class="tkt-sub">Created on 15 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Access issue to QuickERP</div>
+                      <div class="subject-desc">I am unable to login to my QuickERP account...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-access">🔑</span> Product Access</span></td>
+                    <td data-label="Status"><span class="badge-status badge-progress">In Progress</span></td>
+                    <td data-label="Priority"><span class="priority medium">− Medium</span></td>
+                    <td data-label="Updated On"><div class="updated-on">17 May 2025</div><div class="updated-time">04:20 PM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0054</div>
+                      <div class="tkt-sub">Created on 12 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Feature request: Custom Reports</div>
+                      <div class="subject-desc">We would like to request custom reporting...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-feature">✨</span> Feature Request</span></td>
+                    <td data-label="Status"><span class="badge-status badge-hold">On Hold</span></td>
+                    <td data-label="Priority"><span class="priority low">↓ Low</span></td>
+                    <td data-label="Updated On"><div class="updated-on">16 May 2025</div><div class="updated-time">11:45 AM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0053</div>
+                      <div class="tkt-sub">Created on 10 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Incorrect tax calculation in invoice</div>
+                      <div class="subject-desc">Tax is not being calculated correctly for...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-billing">🧾</span> Billing &amp; Invoices</span></td>
+                    <td data-label="Status"><span class="badge-status badge-resolved">Resolved</span></td>
+                    <td data-label="Priority"><span class="priority high">↑ High</span></td>
+                    <td data-label="Updated On"><div class="updated-on">14 May 2025</div><div class="updated-time">02:30 PM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0052</div>
+                      <div class="tkt-sub">Created on 05 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Request for training session</div>
+                      <div class="subject-desc">We would like to schedule a training session...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-training">🎓</span> Training &amp; Onboarding</span></td>
+                    <td data-label="Status"><span class="badge-status badge-resolved">Resolved</span></td>
+                    <td data-label="Priority"><span class="priority medium">− Medium</span></td>
+                    <td data-label="Updated On"><div class="updated-on">08 May 2025</div><div class="updated-time">03:10 PM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Ticket ID">
+                      <div class="tkt-id">TKT-2025-0049</div>
+                      <div class="tkt-sub">Created on 01 May 2025</div>
+                    </td>
+                    <td data-label="Subject">
+                      <div class="subject-title">Data migration query</div>
+                      <div class="subject-desc">Need clarification on data migration process...</div>
+                    </td>
+                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-implementation">🧩</span> Implementation</span></td>
+                    <td data-label="Status"><span class="badge-status badge-resolved">Resolved</span></td>
+                    <td data-label="Priority"><span class="priority low">↓ Low</span></td>
+                    <td data-label="Updated On"><div class="updated-on">03 May 2025</div><div class="updated-time">10:05 AM</div></td>
+                    <td class="row-arrow">›</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span>Showing 1 to 7 of 7 tickets</span>
+              <div class="page-btns">
+                <button type="button" class="page-btn">‹</button>
+                <button type="button" class="page-btn active">1</button>
+                <button type="button" class="page-btn">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-card">
+            <h3>Quick Actions</h3>
+            <div class="quick-action">
+              <span class="icon">📝</span>
+              <div><strong>Create New Ticket</strong><span>Raise a new support request</span></div>
+            </div>
+            <div class="quick-action">
+              <span class="icon">📘</span>
+              <div><strong>View Knowledge Base</strong><span>Browse help articles and guides</span></div>
+            </div>
+            <div class="quick-action">
+              <span class="icon">🎧</span>
+              <div><strong>Live Chat</strong><span>Chat with our support team</span></div>
+            </div>
+            <div class="quick-action">
+              <span class="icon">📞</span>
+              <div><strong>Contact Support</strong><span>Call or email our team</span></div>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <h3>Support Hours</h3>
+            <div class="hours-row">
+              <span class="icon">🕒</span>
+              <div><strong>Monday - Friday</strong><span class="time">9:00 AM - 7:00 PM IST</span></div>
+            </div>
+            <div class="hours-row">
+              <span class="icon">🕒</span>
+              <div><strong>Saturday</strong><span class="time">9:00 AM - 1:00 PM IST</span></div>
+            </div>
+            <div class="closed-note"><span>ⓘ</span><span>We're closed on Sundays</span></div>
+          </div>
+
+          <div class="side-card">
+            <h3>Need immediate help?</h3>
+            <p class="help-text">Use live chat for faster resolution.</p>
+            <button type="button" class="btn-full-outline">💬 Start Live Chat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="dash-footer">
+      <a href="../legal/customer dashboard privacy policy.pdf">Privacy Policy</a> <span>|</span> <a href="../legal/dashboard terms and conditions.pdf">Terms of Use</a>
+    </footer>
+  </div>
+
+  <script src="../shared/dashboard-shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documents – QuickWrks Customer Portal</title>
+  <link rel="stylesheet" href="documents.css">
+</head>
+<body>
+  <!--
+    Backend (Python):
+    - GET /api/documents?category=all|invoice|agreement|product|other&search=&page=1
+    - GET /api/documents/{id}/download
+    - GET /api/documents/{id}/preview
+    - POST /api/documents/upload
+    - GET /api/storage/usage
+  -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon">Q</div>
+      <div class="brand-text">
+        <strong>QuickWrks</strong>
+        <span>Customer Portal</span>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+      <li><a href="my-updates.html"><span class="nav-icon">🔔</span> My Updates</a></li>
+      <li><a href="invoices.html"><span class="nav-icon">📄</span> Invoices &amp; Payments</a></li>
+      <li><a href="transactions.html"><span class="nav-icon">↔️</span> Transactions</a></li>
+      <li><a href="support-tickets.html"><span class="nav-icon">💬</span> Support Tickets</a></li>
+      <li><a href="my-products.html"><span class="nav-icon">📦</span> My Products</a></li>
+      <li><a href="documents.html"><span class="nav-icon">📁</span> Documents</a></li>
+      <li><a href="settings.html"><span class="nav-icon">⚙️</span> Profile &amp; Settings</a></li>
+    </ul>
+    <div class="sidebar-help">
+      <h4>Need Help?</h4>
+      <p>We're here to assist you.</p>
+      <button class="btn-support" type="button">Create a Support Ticket</button>
+    </div>
+    <div class="sidebar-footer">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeLabel">Dark mode</span>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </button>
+      <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="topbar-right">
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="company-select" type="button">
+          <span class="company-avatar">AC</span>
+          <span class="company-meta">
+            <strong>Aarav Corp. Ltd.</strong>
+            <span>Customer ID: CUST-100245</span>
+          </span>
+          <span>▾</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>Documents</h1>
+        <p>Access and download important documents shared with you by QuickWrks.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon green">📄</div>
+          <div>
+            <div class="stat-value">58</div>
+            <div class="stat-label">Total Documents</div>
+            <div class="stat-sub">All categories</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue">📃</div>
+          <div>
+            <div class="stat-value">24</div>
+            <div class="stat-label">Invoices</div>
+            <div class="stat-sub link">View invoices</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">🤝</div>
+          <div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Agreements</div>
+            <div class="stat-sub link">View agreements</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">🗂️</div>
+          <div>
+            <div class="stat-value">22</div>
+            <div class="stat-label">Other Documents</div>
+            <div class="stat-sub link">View all</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layout-2">
+        <div>
+          <div class="toolbar">
+            <div class="tabs">
+              <button type="button" class="tab active" data-tab="all">All Documents</button>
+              <button type="button" class="tab" data-tab="invoices">Invoices</button>
+              <button type="button" class="tab" data-tab="agreements">Agreements</button>
+              <button type="button" class="tab" data-tab="product">Product Documents</button>
+              <button type="button" class="tab" data-tab="other">Other</button>
+            </div>
+            <div class="toolbar-actions">
+              <div class="search-box">🔍<input type="text" placeholder="Search documents..." /></div>
+              <button type="button" class="btn-outline">▽ Filter</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Document Name</th>
+                    <th>Category</th>
+                    <th>Related To</th>
+                    <th>Uploaded On ↓</th>
+                    <th>Size</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon pdf">📕</div>
+                        <div><div class="doc-name">INV-2025-0148.pdf</div><div class="doc-sub">Tax Invoice</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-invoice">Invoice</span></td>
+                    <td data-label="Related To"><span class="related-to">Invoice # INV-2025-0148</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">18 May 2025</div><div class="uploaded-time">10:30 AM</div></td>
+                    <td data-label="Size"><span class="doc-size">245 KB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon pdf">📕</div>
+                        <div><div class="doc-name">INV-2025-0132.pdf</div><div class="doc-sub">Tax Invoice</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-invoice">Invoice</span></td>
+                    <td data-label="Related To"><span class="related-to">Invoice # INV-2025-0132</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">16 May 2025</div><div class="uploaded-time">09:15 AM</div></td>
+                    <td data-label="Size"><span class="doc-size">238 KB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon doc">📄</div>
+                        <div><div class="doc-name">QuickERP_SLA.pdf</div><div class="doc-sub">Service Level Agreement</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-agreement">Agreement</span></td>
+                    <td data-label="Related To"><span class="related-to">QuickERP</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">12 Apr 2025</div><div class="uploaded-time">02:20 PM</div></td>
+                    <td data-label="Size"><span class="doc-size">1.2 MB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon doc">📄</div>
+                        <div><div class="doc-name">DPA_Agreement.pdf</div><div class="doc-sub">Data Processing Agreement</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-agreement">Agreement</span></td>
+                    <td data-label="Related To"><span class="related-to">QuickHR</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">28 Mar 2025</div><div class="uploaded-time">11:45 AM</div></td>
+                    <td data-label="Size"><span class="doc-size">685 KB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon txt">📘</div>
+                        <div><div class="doc-name">Implementation_Guide.pdf</div><div class="doc-sub">Product Guide</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-product">Product Document</span></td>
+                    <td data-label="Related To"><span class="related-to">QuickCRM</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">20 Mar 2025</div><div class="uploaded-time">03:10 PM</div></td>
+                    <td data-label="Size"><span class="doc-size">2.4 MB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon xls">📗</div>
+                        <div><div class="doc-name">Pricing_Summary.xlsx</div><div class="doc-sub">Pricing Details</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-other">Other</span></td>
+                    <td data-label="Related To"><span class="related-to">Aarav Corp. Ltd.</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">05 Feb 2025</div><div class="uploaded-time">10:05 AM</div></td>
+                    <td data-label="Size"><span class="doc-size">156 KB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="doc-name-td">
+                      <div class="doc-name-cell">
+                        <div class="doc-icon pdf">📕</div>
+                        <div><div class="doc-name">T&amp;C_QuickWrks.pdf</div><div class="doc-sub">Terms &amp; Conditions</div></div>
+                      </div>
+                    </td>
+                    <td data-label="Category"><span class="cat-tag cat-other">Other</span></td>
+                    <td data-label="Related To"><span class="related-to">General</span></td>
+                    <td data-label="Uploaded On"><div class="uploaded-on">15 Jan 2025</div><div class="uploaded-time">04:30 PM</div></td>
+                    <td data-label="Size"><span class="doc-size">512 KB</span></td>
+                    <td data-label="Action">
+                      <div class="actions-cell">
+                        <button class="btn-icon-sm" type="button" aria-label="Download">⬇️</button>
+                        <button class="btn-icon-sm" type="button" aria-label="Preview">👁️</button>
+                        <button class="btn-icon-sm kebab" type="button" aria-label="More">⋮</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span>Showing 1 to 7 of 58 documents</span>
+              <div class="page-btns">
+                <button type="button" class="page-btn">‹</button>
+                <button type="button" class="page-btn active">1</button>
+                <button type="button" class="page-btn">2</button>
+                <button type="button" class="page-btn">3</button>
+                <span class="page-btn dots">…</span>
+                <button type="button" class="page-btn">9</button>
+                <button type="button" class="page-btn">›</button>
+              </div>
+              <select class="per-page-select">
+                <option>10 per page</option>
+                <option>25 per page</option>
+                <option>50 per page</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-card">
+            <h3>Storage Used</h3>
+            <div class="storage-ring-wrap">
+              <div class="storage-ring">
+                <svg width="140" height="140" viewBox="0 0 140 140">
+                  <circle cx="70" cy="70" r="60" fill="none" stroke="var(--track)" stroke-width="12" />
+                  <circle cx="70" cy="70" r="60" fill="none" stroke="var(--primary)" stroke-width="12"
+                    stroke-linecap="round" stroke-dasharray="376.99" stroke-dashoffset="248.6" />
+                </svg>
+                <div class="storage-ring-label">
+                  <strong>34%</strong>
+                  <span>used</span>
+                </div>
+              </div>
+            </div>
+            <div class="storage-detail">3.4 GB of 10 GB used</div>
+            <div class="storage-bar"><div class="storage-bar-fill" style="width:34%"></div></div>
+            <div class="view-full-link">View storage details →</div>
+          </div>
+
+          <div class="side-card">
+            <h3>Quick Actions</h3>
+            <div class="quick-action">
+              <span class="icon">⬆️</span>
+              <div><strong>Upload Document</strong><span>Upload a new document</span></div>
+            </div>
+            <div class="quick-action">
+              <span class="icon">📥</span>
+              <div><strong>Request a Document</strong><span>Request documents from us</span></div>
+            </div>
+            <div class="quick-action">
+              <span class="icon">⬇️</span>
+              <div><strong>Download All Invoices</strong><span>Download all invoice documents</span></div>
+            </div>
+            <div class="quick-action">
+              <span class="icon">📁</span>
+              <div><strong>View Expiring Documents</strong><span>See documents expiring soon</span></div>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <h3>Need something?</h3>
+            <p class="help-text">Can't find the document you're looking for?</p>
+            <button type="button" class="btn-full-outline">🎧 Contact Support</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="dash-footer">
+      <a href="../legal/customer dashboard privacy policy.pdf">Privacy Policy</a> <span>|</span> <a href="../legal/dashboard terms and conditions.pdf">Terms of Use</a>
+    </footer>
+  </div>
+
+  <script src="../shared/dashboard-shared.js"></script>
+</body>
+</html>

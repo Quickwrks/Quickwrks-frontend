@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile &amp; Settings – QuickWrks Customer Portal</title>
+  <link rel="stylesheet" href="profile-settings.css">
+</head>
+<body>
+  <!--
+    Backend (Python):
+    - GET /api/profile
+    - PUT /api/profile              (update org/contact details)
+    - GET /api/subscription
+    - GET /api/profile/completion
+    - POST /api/account/change-password
+    - GET /api/account/export-data
+    - DELETE /api/account            (permanently delete account)
+  -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon">Q</div>
+      <div class="brand-text">
+        <strong>QuickWrks</strong>
+        <span>Customer Portal</span>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+      <li><a href="my-updates.html"><span class="nav-icon">🔔</span> My Updates</a></li>
+      <li><a href="invoices.html"><span class="nav-icon">📄</span> Invoices &amp; Payments</a></li>
+      <li><a href="transactions.html"><span class="nav-icon">↔️</span> Transactions</a></li>
+      <li><a href="support-tickets.html"><span class="nav-icon">💬</span> Support Tickets</a></li>
+      <li><a href="my-products.html"><span class="nav-icon">📦</span> My Products</a></li>
+      <li><a href="documents.html"><span class="nav-icon">📁</span> Documents</a></li>
+      <li><a href="settings.html"><span class="nav-icon">⚙️</span> Profile &amp; Settings</a></li>
+    </ul>
+    <div class="sidebar-help">
+      <h4>Need Help?</h4>
+      <p>We're here to assist you.</p>
+      <button class="btn-support" type="button">Create a Support Ticket →</button>
+    </div>
+    <div class="sidebar-footer">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeLabel">Dark mode</span>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </button>
+      <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="topbar-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Search anything..." />
+        <span class="kbd-hint">Ctrl + /</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="company-select" type="button">
+          <span class="company-avatar">AC</span>
+          <span class="company-meta">
+            <strong>Aarav Corp. Ltd.</strong>
+            <span>Customer ID: CUST-100245</span>
+          </span>
+          <span>▾</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>Profile &amp; Settings</h1>
+        <p>Manage your account information, preferences and security settings.</p>
+      </div>
+
+      <div class="settings-tabs">
+        <button type="button" class="settings-tab active" data-tab="profile">👤 Profile Information</button>
+        <button type="button" class="settings-tab" data-tab="account">⚙️ Account Settings</button>
+        <button type="button" class="settings-tab" data-tab="security">🛡️ Security</button>
+        <button type="button" class="settings-tab" data-tab="notifications">🔔 Notification Preferences</button>
+        <button type="button" class="settings-tab" data-tab="billing">💳 Billing &amp; Preferences</button>
+      </div>
+
+      <div class="layout-2">
+        <div>
+          <div class="panel">
+            <div class="panel-title">Profile Information</div>
+            <div class="panel-sub">View and update your personal and organization details.</div>
+
+            <div class="profile-id-row">
+              <div class="profile-avatar-wrap">
+                <div class="profile-avatar">AC</div>
+                <button type="button" class="avatar-edit-btn" aria-label="Change photo">📷</button>
+              </div>
+              <div>
+                <div class="profile-id-name-row">
+                  <span class="profile-id-name">Aarav Corp. Ltd.</span>
+                  <span class="badge-verified">✓ Verified</span>
+                </div>
+                <div class="profile-id-meta">Customer ID: CUST-100245<br />Since 12 Jan 2024</div>
+              </div>
+            </div>
+
+            <form id="profileForm">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="orgName">Organization Name</label>
+                  <input type="text" id="orgName" name="orgName" value="Aarav Corp. Ltd." />
+                </div>
+                <div class="form-field">
+                  <label for="contactPerson">Contact Person</label>
+                  <input type="text" id="contactPerson" name="contactPerson" value="Rahul Sharma" />
+                </div>
+                <div class="form-field">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" value="billing@aaravcorp.com" />
+                </div>
+                <div class="form-field">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" value="+91 98123 45678" />
+                </div>
+                <div class="form-field full">
+                  <label for="address">Address</label>
+                  <textarea id="address" name="address" rows="2">301, 3rd Floor, Tower B, Cyber Park, Sector 62, Noida, Uttar Pradesh - 201309</textarea>
+                </div>
+                <div class="form-field">
+                  <label for="gstin">GSTIN <span class="optional">(Optional)</span></label>
+                  <input type="text" id="gstin" name="gstin" value="09AABCA1234B1Z5" />
+                </div>
+                <div class="form-field">
+                  <label for="pan">PAN <span class="optional">(Optional)</span></label>
+                  <input type="text" id="pan" name="pan" value="AABCA1234B" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-card">
+            <div class="sub-overview-head">
+              <div class="sub-overview-icon">📅</div>
+              <h3>Subscription Overview</h3>
+            </div>
+            <div class="sub-label">Current Plan</div>
+            <div class="sub-plan-row">
+              <span class="sub-plan-name">Professional Plan</span>
+              <span class="badge-active">Active</span>
+            </div>
+            <div class="sub-label">Next Renewal</div>
+            <div class="sub-renewal-days">18 Jun 2025 (30 days left)</div>
+            <button type="button" class="btn-full-link">View My Products →</button>
+          </div>
+
+          <div class="side-card">
+            <h3 style="margin-bottom:1rem;">Profile Completion</h3>
+            <div class="completion-row">
+              <div class="completion-ring">
+                <svg width="96" height="96" viewBox="0 0 96 96">
+                  <circle cx="48" cy="48" r="40" fill="none" stroke="var(--track)" stroke-width="9" />
+                  <circle cx="48" cy="48" r="40" fill="none" stroke="var(--primary)" stroke-width="9"
+                    stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="37.7" />
+                </svg>
+                <div class="completion-ring-label">85%</div>
+              </div>
+              <ul class="completion-list">
+                <li><span class="completion-check done">✓</span> Organization Details</li>
+                <li><span class="completion-check done">✓</span> Contact Information</li>
+                <li><span class="completion-check done">✓</span> Billing Information</li>
+                <li><span class="completion-check todo"></span> Profile Picture</li>
+              </ul>
+            </div>
+            <div class="completion-note">Great job! Your profile is almost complete.</div>
+          </div>
+
+          <div class="side-card">
+            <h3 style="margin-bottom:0.4rem;">Quick Actions</h3>
+            <div class="qa-item">
+              <div class="qa-icon">🔒</div>
+              <div class="qa-text"><strong>Change Password</strong><span>Update your account password</span></div>
+              <span class="qa-arrow">›</span>
+            </div>
+            <div class="qa-item">
+              <div class="qa-icon">⬇️</div>
+              <div class="qa-text"><strong>Download My Data</strong><span>Download your account data</span></div>
+              <span class="qa-arrow">›</span>
+            </div>
+            <div class="qa-item danger">
+              <div class="qa-icon">🗑️</div>
+              <div class="qa-text"><strong>Delete Account</strong><span>Permanently delete your account</span></div>
+              <span class="qa-arrow">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="dash-footer">
+      <a href="../legal/customer dashboard privacy policy.pdf">Privacy Policy</a> <span>|</span> <a href="../legal/dashboard terms and conditions.pdf">Terms of Use</a>
+    </footer>
+  </div>
+
+  <script src="profile-settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# OS / filesystem
+Thumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+
+# Dependencies / build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs / temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*~
+
+# Local backups
+backup/
+backups/
+temp/
+tmp/

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Updates – QuickWrks Customer Portal</title>
+  <link rel="stylesheet" href="my-updates.css" />
+</head>
+<body>
+  <!--
+    Backend (Python) notes:
+    - GET /api/updates?type=all|announcement|product|system&q=&page=1&per_page=10
+    - Theme: cookie/user setting theme=light|dark (default light)
+  -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon">Q</div>
+      <div class="brand-text">
+        <strong>QuickWrks</strong>
+        <span>Customer Portal</span>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+      <li><a href="my-updates.html"><span class="nav-icon">🔔</span> My Updates</a></li>
+      <li><a href="invoices.html"><span class="nav-icon">📄</span> Invoices &amp; Payments</a></li>
+      <li><a href="transactions.html"><span class="nav-icon">↔️</span> Transactions</a></li>
+      <li><a href="support-tickets.html"><span class="nav-icon">💬</span> Support Tickets</a></li>
+      <li><a href="my-products.html"><span class="nav-icon">📦</span> My Products</a></li>
+      <li><a href="documents.html"><span class="nav-icon">📁</span> Documents</a></li>
+      <li><a href="settings.html"><span class="nav-icon">⚙️</span> Profile &amp; Settings</a></li>
+    </ul>
+
+    <div class="sidebar-help">
+      <h4>Need Help?</h4>
+      <p>We're here to assist you.</p>
+      <button class="btn-support" type="button">Create a Support Ticket</button>
+    </div>
+    <div class="sidebar-footer">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeLabel">Dark mode</span>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </button>
+      <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div class="topbar-right">
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="company-select" type="button">
+          <span class="company-avatar">AC</span>
+          <span class="company-meta">
+            <strong>Aarav Corp. Ltd.</strong>
+            <span>Customer ID: CUST-100245</span>
+          </span>
+          <span>▾</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>My Updates</h1>
+        <p>Stay informed with the latest updates from QuickWrks.</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab active" data-filter="all" role="tab">📋 All Updates</button>
+          <button type="button" class="tab" data-filter="announcement" role="tab">📢 Announcements</button>
+          <button type="button" class="tab" data-filter="product" role="tab">📦 Product Updates</button>
+          <button type="button" class="tab" data-filter="system" role="tab">⚙️ System Updates</button>
+        </div>
+        <div class="toolbar-actions">
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="search" id="searchInput" placeholder="Search updates..." aria-label="Search updates" />
+          </div>
+          <button type="button" class="btn-filter">☰ Filter</button>
+        </div>
+      </div>
+
+      <div class="updates-list" id="updatesList">
+        <article class="update-card" data-type="announcement" data-title="Scheduled Maintenance – 18 May 2025">
+          <div class="update-icon green">📢</div>
+          <div class="update-body">
+            <div class="update-title-row">
+              <span class="update-title">Scheduled Maintenance – 18 May 2025</span>
+              <span class="tag-new">New</span>
+            </div>
+            <p class="update-desc">Our platform will undergo scheduled maintenance on 18th May 2025, 12:00 AM to 4:00 AM IST. During this window, access may be limited.</p>
+          </div>
+          <div class="update-meta">
+            <span class="update-date">16 May 2025</span>
+            <span class="update-time">10:30 AM IST</span>
+            <span class="update-arrow">›</span>
+          </div>
+        </article>
+
+        <article class="update-card" data-type="product" data-title="New Feature: Advanced Reporting">
+          <div class="update-icon purple">📦</div>
+          <div class="update-body">
+            <div class="update-title-row">
+              <span class="update-title">New Feature: Advanced Reporting</span>
+              <span class="tag-new">New</span>
+            </div>
+            <p class="update-desc">Advanced reporting is now live! Generate detailed insights with custom filters, date ranges, and export options.</p>
+          </div>
+          <div class="update-meta">
+            <span class="update-date">15 May 2025</span>
+            <span class="update-time">04:15 PM IST</span>
+            <span class="update-arrow">›</span>
+          </div>
+        </article>
+
+        <article class="update-card" data-type="system" data-title="System Update – Performance Improvements">
+          <div class="update-icon blue">⚙️</div>
+          <div class="update-body">
+            <div class="update-title-row">
+              <span class="update-title">System Update – Performance Improvements</span>
+            </div>
+            <p class="update-desc">We've improved system performance and reduced report generation time by up to 40%. You may experience smoother operation across all modules.</p>
+          </div>
+          <div class="update-meta">
+            <span class="update-date">14 May 2025</span>
+            <span class="update-time">11:20 AM IST</span>
+            <span class="update-arrow">›</span>
+          </div>
+        </article>
+
+        <article class="update-card" data-type="security" data-title="Security Enhancement Update">
+          <div class="update-icon orange">🛡️</div>
+          <div class="update-body">
+            <div class="update-title-row">
+              <span class="update-title">Security Enhancement Update</span>
+            </div>
+            <p class="update-desc">Multi-factor authentication (MFA) is now available for all customer accounts. Enable it from Profile &amp; Settings for better security.</p>
+          </div>
+          <div class="update-meta">
+            <span class="update-date">12 May 2025</span>
+            <span class="update-time">02:45 PM IST</span>
+            <span class="update-arrow">›</span>
+          </div>
+        </article>
+
+        <article class="update-card" data-type="system" data-title="GST Compliance Module Update">
+          <div class="update-icon green">📄</div>
+          <div class="update-body">
+            <div class="update-title-row">
+              <span class="update-title">GST Compliance Module Update</span>
+            </div>
+            <p class="update-desc">New enhancements to GST reports and e-invoice reconciliation are now live. Check the Invoices &amp; Payments section to explore.</p>
+          </div>
+          <div class="update-meta">
+            <span class="update-date">10 May 2025</span>
+            <span class="update-time">09:10 AM IST</span>
+            <span class="update-arrow">›</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination-bar">
+        <div class="pagination">
+          <button type="button" class="page-btn" disabled aria-label="Previous">‹</button>
+          <button type="button" class="page-btn active">1</button>
+          <button type="button" class="page-btn">2</button>
+          <button type="button" class="page-btn">3</button>
+          <span style="padding:0 0.35rem;color:var(--muted)">…</span>
+          <button type="button" class="page-btn">8</button>
+          <button type="button" class="page-btn" aria-label="Next">›</button>
+        </div>
+        <div class="per-page">
+          <select id="perPage" aria-label="Items per page">
+            <option value="10" selected>10 per page</option>
+            <option value="20">20 per page</option>
+            <option value="50">50 per page</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <footer class="dash-footer">
+      <a href="../legal/customer dashboard privacy policy.pdf">Privacy Policy</a> <span>|</span> <a href="../legal/dashboard terms and conditions.pdf">Terms of Use</a>
+    </footer>
+  </div>
+
+  <script src="my-products.js"></script>
+</body>
+</html>

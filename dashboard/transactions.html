@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transactions – QuickWrks Customer Portal</title>
+  <link rel="stylesheet" href="transactions.css" />
+</head>
+<body>
+  <!--
+    Backend (Python):
+    - GET /api/transactions?type=all|payment|refund|adjustment&page=1&date_from=&date_to=
+    - Filters: type, status, payment_method, amount_min, amount_max
+    - Theme: user setting theme=light|dark (default light)
+  -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-icon">Q</div>
+      <div class="brand-text">
+        <strong>QuickWrks</strong>
+        <span>Customer Portal</span>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a></li>
+      <li><a href="my-updates.html"><span class="nav-icon">🔔</span> My Updates</a></li>
+      <li><a href="invoices.html"><span class="nav-icon">📄</span> Invoices &amp; Payments</a></li>
+      <li><a href="transactions.html"><span class="nav-icon">↔️</span> Transactions</a></li>
+      <li><a href="support-tickets.html"><span class="nav-icon">💬</span> Support Tickets</a></li>
+      <li><a href="my-products.html"><span class="nav-icon">📦</span> My Products</a></li>
+      <li><a href="documents.html"><span class="nav-icon">📁</span> Documents</a></li>
+      <li><a href="settings.html"><span class="nav-icon">⚙️</span> Profile &amp; Settings</a></li>
+    </ul>
+    <div class="sidebar-help">
+      <h4>Need Help?</h4>
+      <p>We're here to assist you.</p>
+      <button class="btn-support" type="button">Create a Support Ticket</button>
+    </div>
+    <div class="sidebar-footer">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeLabel">Dark mode</span>
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      </button>
+      <button type="button" class="btn-logout" id="btnLogout">Logout</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="topbar-right">
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="company-select" type="button">
+          <span class="company-avatar">AC</span>
+          <span class="company-meta">
+            <strong>Aarav Corp. Ltd.</strong>
+            <span>Customer ID: CUST-100245</span>
+          </span>
+          <span>▾</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>Transactions</h1>
+        <p>View your complete transaction history and payment details.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Total Transactions</div>
+            <div class="stat-value">28</div>
+            <div class="stat-sub">All time</div>
+          </div>
+          <div class="stat-icon green">↔</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Total Paid</div>
+            <div class="stat-value">₹6,45,600.00</div>
+            <div class="stat-sub success">All time</div>
+          </div>
+          <div class="stat-icon green">✓</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Total Amount</div>
+            <div class="stat-value">₹6,83,750.00</div>
+            <div class="stat-sub">All time</div>
+          </div>
+          <div class="stat-icon blue">👜</div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <div class="stat-label">Refunds</div>
+            <div class="stat-value">₹25,000.00</div>
+            <div class="stat-sub">All time</div>
+          </div>
+          <div class="stat-icon purple">↻</div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="all">All Transactions</button>
+          <button type="button" class="tab" data-tab="payment">Payments Received</button>
+          <button type="button" class="tab" data-tab="refund">Refunds</button>
+          <button type="button" class="tab" data-tab="adjustment">Adjustments</button>
+        </div>
+        <div class="toolbar-actions">
+          <button type="button" class="btn-outline">↓ Download Statement</button>
+        </div>
+      </div>
+
+      <div class="layout-2">
+        <div>
+          <div class="panel">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Related To</th>
+                    <th>Amount</th>
+                    <th>Payment Method</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2025-0528-0001</strong></td>
+                    <td data-label="Date"><div>28 May 2025<br><span class="inv-sub">10:30 AM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0148</span></td>
+                    <td data-label="Amount"><strong>₹28,750.00</strong></td>
+                    <td data-label="Payment Method">UPI</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2025-0516-0008</strong></td>
+                    <td data-label="Date"><div>16 May 2025<br><span class="inv-sub">04:22 PM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0132</span></td>
+                    <td data-label="Amount"><strong>₹20,000.00</strong></td>
+                    <td data-label="Payment Method">Net Banking</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2025-0401-0012</strong></td>
+                    <td data-label="Date"><div>01 Apr 2025<br><span class="inv-sub">11:15 AM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0112</span></td>
+                    <td data-label="Amount"><strong>₹20,000.00</strong></td>
+                    <td data-label="Payment Method">UPI</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2025-0312-0005</strong></td>
+                    <td data-label="Date"><div>12 Mar 2025<br><span class="inv-sub">02:10 PM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0101</span></td>
+                    <td data-label="Amount"><strong>₹15,000.00</strong></td>
+                    <td data-label="Payment Method">Visa •••• 4242</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2025-0211-0003</strong></td>
+                    <td data-label="Date"><div>11 Feb 2025<br><span class="inv-sub">09:40 AM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0087</span></td>
+                    <td data-label="Amount"><strong>₹18,750.00</strong></td>
+                    <td data-label="Payment Method">Mastercard •••• 9987</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2025-0120-0004</strong></td>
+                    <td data-label="Date"><div>20 Jan 2025<br><span class="inv-sub">03:05 PM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-overdue">• Refund</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0070</span></td>
+                    <td data-label="Amount"><strong style="color:var(--danger)">− ₹5,000.00</strong></td>
+                    <td data-label="Payment Method">UPI</td>
+                    <td data-label="Status"><span class="badge-status" style="background:var(--info-soft);color:var(--info)">• Processed</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2024-1210-0009</strong></td>
+                    <td data-label="Date"><div>10 Dec 2024<br><span class="inv-sub">01:08 PM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2024-0056</span></td>
+                    <td data-label="Amount"><strong>₹10,000.00</strong></td>
+                    <td data-label="Payment Method">Net Banking</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2024-1115-0004</strong></td>
+                    <td data-label="Date"><div>15 Nov 2024<br><span class="inv-sub">10:22 AM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-due">• Adjustment</span></td>
+                    <td data-label="Related To">Account Adjustment</td>
+                    <td data-label="Amount"><strong style="color:var(--danger)">− ₹2,500.00</strong></td>
+                    <td data-label="Payment Method">—</td>
+                    <td data-label="Status"><span class="badge-status" style="background:var(--bg-hover);color:var(--muted)">• Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2024-1012-0002</strong></td>
+                    <td data-label="Date"><div>12 Oct 2024<br><span class="inv-sub">05:30 PM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2024-0041</span></td>
+                    <td data-label="Amount"><strong>₹15,000.00</strong></td>
+                    <td data-label="Payment Method">UPI</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                  <tr>
+                    <td data-label="Transaction ID"><strong>TXN-2024-0910-0001</strong></td>
+                    <td data-label="Date"><div>10 Sep 2024<br><span class="inv-sub">11:45 AM IST</span></div></td>
+                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
+                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2024-0030</span></td>
+                    <td data-label="Amount"><strong>₹12,500.00</strong></td>
+                    <td data-label="Payment Method">Net Banking</td>
+                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span>Showing 1 to 10 of 28 transactions</span>
+              <div class="page-btns">
+                <button type="button" class="page-btn" disabled>‹</button>
+                <button type="button" class="page-btn active">1</button>
+                <button type="button" class="page-btn">2</button>
+                <button type="button" class="page-btn">3</button>
+                <button type="button" class="page-btn">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="side-card">
+            <h3 style="display:flex;justify-content:space-between;align-items:center">
+              <span>Filter Transactions</span>
+              <button type="button" style="background:none;border:none;color:var(--primary);font-size:0.8rem;font-weight:600;cursor:pointer;font-family:inherit">Clear all</button>
+            </h3>
+            <label class="stat-label" style="display:block;margin-bottom:0.35rem">Date Range</label>
+            <div class="search-box" style="margin-bottom:0.85rem;min-width:0">
+              <span>📅</span>
+              <input type="text" value="01 Apr 2025 - 28 May 2025" readonly style="cursor:pointer" />
+            </div>
+            <label class="stat-label" style="display:block;margin-bottom:0.35rem">Transaction Type</label>
+            <select style="width:100%;padding:0.55rem 0.75rem;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:0.88rem;margin-bottom:0.85rem;font-family:inherit">
+              <option>All Types</option>
+              <option>Payment</option>
+              <option>Refund</option>
+              <option>Adjustment</option>
+            </select>
+            <label class="stat-label" style="display:block;margin-bottom:0.35rem">Status</label>
+            <select style="width:100%;padding:0.55rem 0.75rem;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:0.88rem;margin-bottom:0.85rem;font-family:inherit">
+              <option>All Statuses</option>
+              <option>Success</option>
+              <option>Processed</option>
+              <option>Completed</option>
+            </select>
+            <label class="stat-label" style="display:block;margin-bottom:0.35rem">Payment Method</label>
+            <select style="width:100%;padding:0.55rem 0.75rem;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:0.88rem;margin-bottom:0.85rem;font-family:inherit">
+              <option>All Methods</option>
+              <option>UPI</option>
+              <option>Net Banking</option>
+              <option>Card</option>
+            </select>
+            <label class="stat-label" style="display:block;margin-bottom:0.35rem">Amount Range</label>
+            <div class="amount-range" style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:1rem;width:100%;max-width:100%;box-sizing:border-box">
+              <input type="text" placeholder="Min Amount" class="amount-input" style="flex:1 1 100px;min-width:0;max-width:100%;width:auto;padding:0.5rem 0.65rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:0.85rem;font-family:inherit;box-sizing:border-box" />
+              <span style="color:var(--muted);font-size:0.8rem;flex-shrink:0">to</span>
+              <input type="text" placeholder="Max Amount" class="amount-input" style="flex:1 1 100px;min-width:0;max-width:100%;width:auto;padding:0.5rem 0.65rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:0.85rem;font-family:inherit;box-sizing:border-box" />
+            </div>
+            <button type="button" class="btn-primary" style="width:100%;justify-content:center">Apply Filters</button>
+          </div>
+          <div class="side-card">
+            <h3>Need something?</h3>
+            <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.85rem;line-height:1.45">Can't find the transaction you are looking for?</p>
+            <button type="button" class="btn-outline" style="width:100%;justify-content:center">Contact Support</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="dash-footer">
+      <a href="../legal/customer dashboard privacy policy.pdf">Privacy Policy</a> <span>|</span> <a href="../legal/dashboard terms and conditions.pdf">Terms of Use</a>
+    </footer>
+  </div>
+
+  <script src="../shared/dashboard-shared.js"></script>
+</body>
+</html>
