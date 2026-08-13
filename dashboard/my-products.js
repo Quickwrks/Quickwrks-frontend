@@ -1,125 +1,110 @@
-(function () {
+/**
+ * dashboard/my-products.js
+ * Phase 2 — live product data integration.
+ * Depends on: ../shared/api.js, ../shared/portal-utils.js
+ */
+(async function () {
   'use strict';
 
-  var root = document.documentElement;
-  var themeToggle = document.getElementById('themeToggle');
-  var themeLabel = document.getElementById('themeLabel');
-  var sidebar = document.getElementById('sidebar');
-  var overlay = document.getElementById('sidebarOverlay');
-  var menuToggle = document.getElementById('menuToggle');
+  var P = window.qwPortal;
+  P.initTheme();
+  P.initSidebar();
+  P.initLogout('../login.html');
 
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    try { localStorage.setItem('qw_theme', theme); } catch (e) {}
-    if (themeLabel) {
-      themeLabel.textContent = theme === 'light' ? 'Dark mode' : 'Light mode';
-    }
-  }
-  var saved = null;
-  try { saved = localStorage.getItem('qw_theme'); } catch (e) {}
-  applyTheme(saved === 'dark' ? 'dark' : 'light');
+  var me = await P.requireAuth('../login.html');
+  if (!me) return;
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function () {
-      applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
-    });
+  var container = document.getElementById('productsContainer');
+  if (container) container.innerHTML = P.loadingState('Loading products…');
+
+  var results = await Promise.allSettled([
+    window.qwApi.get('/api/customer/profile'),
+    window.qwApi.get('/api/customer/products'),
+  ]);
+
+  if (results[0].status === 'fulfilled' && results[0].value && results[0].value.ok) {
+    P.hydrateTopbar(await results[0].value.json());
   }
 
-  function openMenu() {
-    if (!sidebar) return;
-    sidebar.classList.add('open');
-    sidebar.style.setProperty('left', '0px', 'important');
-    if (overlay) { overlay.classList.add('show'); overlay.style.display = 'block'; }
-    document.body.classList.add('menu-open');
-    if (menuToggle) {
-      menuToggle.textContent = '\u2715';
-      menuToggle.setAttribute('aria-expanded', 'true');
-    }
-  }
-  function closeMenu() {
-    if (!sidebar) return;
-    sidebar.classList.remove('open');
-    if (window.innerWidth <= 1024) {
-      sidebar.style.setProperty('left', '-280px', 'important');
-    } else {
-      sidebar.style.setProperty('left', '0px', 'important');
-    }
-    if (overlay) { overlay.classList.remove('show'); overlay.style.display = 'none'; }
-    document.body.classList.remove('menu-open');
-    if (menuToggle) {
-      menuToggle.textContent = '\u2630';
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
-  }
-  function toggleMenu(e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    if (sidebar && sidebar.classList.contains('open')) closeMenu();
-    else openMenu();
-  }
-  if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
-  if (overlay) overlay.addEventListener('click', closeMenu);
-  document.querySelectorAll('.sidebar-nav a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      if (window.innerWidth <= 1024) closeMenu();
-    });
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeMenu();
-  });
-  window.addEventListener('resize', function () {
-    if (window.innerWidth > 1024) {
-      sidebar.classList.remove('open');
-      sidebar.style.setProperty('left', '0px', 'important');
-      if (overlay) { overlay.classList.remove('show'); overlay.style.display = 'none'; }
-      document.body.classList.remove('menu-open');
-    } else if (!sidebar.classList.contains('open')) {
-      sidebar.style.setProperty('left', '-280px', 'important');
-    }
-  });
-  if (window.innerWidth <= 1024) {
-    sidebar.style.setProperty('left', '-280px', 'important');
-  }
+  if (results[1].status === 'fulfilled' && results[1].value && results[1].value.ok) {
+    var products = await results[1].value.json();
 
-  // Tabs filter
-  var tabs = document.querySelectorAll('.tab');
-  var cards = document.querySelectorAll('.update-card');
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tabs.forEach(function (t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      var filter = tab.getAttribute('data-filter');
-      cards.forEach(function (card) {
-        var type = card.getAttribute('data-type');
-        if (filter === 'all') {
-          card.style.display = '';
-        } else if (filter === 'system') {
-          card.style.display = (type === 'system' || type === 'security') ? '' : 'none';
-        } else {
-          card.style.display = type === filter ? '' : 'none';
-        }
+    // Client-side summary counts
+    var active = products.filter(function (p) { return p.status === 'active'; }).length;
+    var expired = products.filter(function (p) { return p.status === 'expired'; }).length;
+    var cancelled = products.filter(function (p) { return p.status === 'cancelled'; }).length;
+    var now = new Date();
+    var thirtyDays = 30 * 24 * 60 * 60 * 1000;
+    var renewingSoon = products.filter(function (p) {
+      if (!p.expires_at || p.status !== 'active') return false;
+      var exp = new Date(p.expires_at);
+      return exp > now && (exp - now) <= thirtyDays;
+    }).length;
+
+    var el;
+    el = document.getElementById('prodStatActive'); if (el) el.textContent = active;
+    el = document.getElementById('prodStatRenewing'); if (el) el.textContent = renewingSoon;
+    el = document.getElementById('prodStatExpired'); if (el) el.textContent = expired;
+    el = document.getElementById('prodStatInactive'); if (el) el.textContent = cancelled;
+
+    var elAll = document.getElementById('prodCountAll');
+    if (elAll) elAll.textContent = products.length;
+    var elActive = document.getElementById('prodCountActive');
+    if (elActive) elActive.textContent = active;
+    var elRenewing = document.getElementById('prodCountRenewing');
+    if (elRenewing) elRenewing.textContent = renewingSoon;
+    var elExpired = document.getElementById('prodCountExpired');
+    if (elExpired) elExpired.textContent = expired;
+    var elCancelled = document.getElementById('prodCountCancelled');
+    if (elCancelled) elCancelled.textContent = cancelled;
+
+    if (!container) return;
+
+    function renderProducts(list) {
+      if (list.length === 0) return P.emptyState('No products in this category.');
+      return list.map(function (p) {
+        return '<div class="product-row">' +
+          '<div class="product-icon icon-pos">\ud83d\udce6</div>' +
+          '<div>' +
+            '<div class="product-name-row">' +
+              '<span class="product-name">' + P.escapeHTML(p.name || '—') + '</span>' +
+              P.productStatusBadge(P.escapeHTML(p.status)) +
+            '</div>' +
+            '<div class="product-desc">Started: ' + P.formatDate(p.started_at) + '</div>' +
+          '</div>' +
+          '<div class="renewal-col">' +
+            '<div class="renewal-label">Expires</div>' +
+            '<div class="renewal-date">' + P.formatDate(p.expires_at) + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    container.innerHTML = renderProducts(products);
+
+
+
+    var tabs = document.querySelectorAll('.tab');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var filter = tab.getAttribute('data-tab');
+        var filtered = products;
+        if (filter === 'active') filtered = products.filter(function (p) { return p.status === 'active'; });
+        else if (filter === 'renewing') filtered = products.filter(function (p) {
+          if (!p.expires_at || p.status !== 'active') return false;
+          var exp = new Date(p.expires_at);
+          return exp > now && (exp - now) <= thirtyDays;
+        });
+        else if (filter === 'expired') filtered = products.filter(function (p) { return p.status === 'expired'; });
+        else if (filter === 'cancelled') filtered = products.filter(function (p) { return p.status === 'cancelled'; });
+        container.innerHTML = renderProducts(filtered);
       });
     });
-  });
 
-  // Search
-  var searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', function () {
-      var q = searchInput.value.toLowerCase().trim();
-      cards.forEach(function (card) {
-        var title = (card.getAttribute('data-title') || '').toLowerCase();
-        var text = card.textContent.toLowerCase();
-        card.style.display = (!q || title.indexOf(q) !== -1 || text.indexOf(q) !== -1) ? '' : 'none';
-      });
-    });
+  } else {
+    if (container) container.innerHTML = P.errorState('Could not load products.');
   }
 
-  var btnLogout = document.getElementById('btnLogout');
-  if (btnLogout) {
-    btnLogout.addEventListener('click', function () {
-      if (window.confirm('Log out of QuickWrks?')) {
-        window.location.href = 'login.html';
-      }
-    });
-  }
 })();

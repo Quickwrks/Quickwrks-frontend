@@ -82,21 +82,18 @@
         <p class="card-sub">Access your QuickWrks account</p>
 
         <!--
-          Backend notes (Python):
-          - Method: POST
-          - Action: set to your login endpoint, e.g. /api/auth/login
-          - Fields: identifier, password, remember
-          - CSRF: add hidden csrf_token field if your framework needs it
+          Login is handled by login.js via shared/api.js
+          to fully support CORS, credentials, and API_BASE configuration.
         -->
-        <form id="loginForm" method="POST" action="/api/auth/login" novalidate>
+        <form id="loginForm" novalidate>
           <div class="form-group" id="group-identifier">
-            <label for="identifier">Customer Code</label>
+            <label for="client_id">Customer Code</label>
             <div class="input-wrap">
               <span class="input-icon">✉️</span>
               <input
                 type="text"
-                id="identifier"
-                name="identifier"
+                id="client_id"
+                name="client_id"
                 placeholder="Customer Code"
                 autocomplete="username"
                 required
@@ -164,6 +161,7 @@
     <a href="404.html">Terms of Service</a>
   </footer>
 
-  <script src="login.js"></script>
+  <script src="shared/api.js?v=2"></script>
+  <script src="login.js?v=2"></script>
 </body>
 </html>

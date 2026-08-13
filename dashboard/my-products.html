@@ -53,12 +53,12 @@
     <header class="topbar">
       <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
       <div class="topbar-right">
-        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge" style="display:none"></span></button>
         <button class="company-select" type="button">
-          <span class="company-avatar">AC</span>
+          <span class="company-avatar">…</span>
           <span class="company-meta">
-            <strong>Aarav Corp. Ltd.</strong>
-            <span>Customer ID: CUST-100245</span>
+            <strong>Loading…</strong>
+            <span>Customer ID: —</span>
           </span>
           <span>▾</span>
         </button>
@@ -75,15 +75,15 @@
         <div class="stat-card">
           <div class="stat-icon green">📦</div>
           <div>
-            <div class="stat-value">6</div>
+            <div class="stat-value" id="prodStatActive">—</div>
             <div class="stat-label">Active Products</div>
-            <div class="stat-sub success">All systems operational</div>
+            <div class="stat-sub success">Currently active</div>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon blue">📅</div>
           <div>
-            <div class="stat-value">1</div>
+            <div class="stat-value" id="prodStatRenewing">—</div>
             <div class="stat-label">Renewing Soon</div>
             <div class="stat-sub info">Next 30 days</div>
           </div>
@@ -91,186 +91,35 @@
         <div class="stat-card">
           <div class="stat-icon orange">⏰</div>
           <div>
-            <div class="stat-value">0</div>
-            <div class="stat-label">Expiring Soon</div>
-            <div class="stat-sub warning">Next 30 days</div>
+            <div class="stat-value" id="prodStatExpired">—</div>
+            <div class="stat-label">Expired</div>
+            <div class="stat-sub warning">Requires action</div>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon purple">📦</div>
           <div>
-            <div class="stat-value">0</div>
-            <div class="stat-label">Inactive Products</div>
-            <div class="stat-sub purple">No inactive products</div>
+            <div class="stat-value" id="prodStatInactive">—</div>
+            <div class="stat-label">Cancelled</div>
+            <div class="stat-sub purple">No longer active</div>
           </div>
         </div>
       </div>
 
       <div class="toolbar">
         <div class="tabs">
-          <button type="button" class="tab active" data-tab="all">All Products (6)</button>
-          <button type="button" class="tab" data-tab="active">Active (6)</button>
-          <button type="button" class="tab" data-tab="renewing">Renewing Soon (1)</button>
-          <button type="button" class="tab" data-tab="expired">Expired (0)</button>
-          <button type="button" class="tab" data-tab="cancelled">Cancelled (0)</button>
+          <button type="button" class="tab active" data-tab="all">All Products (<span id="prodCountAll">—</span>)</button>
+          <button type="button" class="tab" data-tab="active">Active (<span id="prodCountActive">—</span>)</button>
+          <button type="button" class="tab" data-tab="renewing">Renewing Soon (<span id="prodCountRenewing">—</span>)</button>
+          <button type="button" class="tab" data-tab="expired">Expired (<span id="prodCountExpired">—</span>)</button>
+          <button type="button" class="tab" data-tab="cancelled">Cancelled (<span id="prodCountCancelled">—</span>)</button>
         </div>
         <button type="button" class="btn-outline">▽ Filter</button>
       </div>
 
       <div class="layout-2">
         <div>
-          <div class="panel">
-            <div class="product-row">
-              <div class="product-icon icon-pos">🖥️</div>
-              <div>
-                <div class="product-name-row">
-                  <span class="product-name">QuickPOS</span>
-                  <span class="badge-active">Active</span>
-                </div>
-                <div class="product-desc">Point of Sale &amp; Billing System</div>
-                <div class="product-sub">Advanced billing, GST invoicing, and retail management</div>
-              </div>
-              <div class="plan-col">
-                <div class="plan-label">Plan</div>
-                <div class="plan-value">Professional</div>
-              </div>
-              <div class="renewal-col">
-                <div class="renewal-label">Next Renewal</div>
-                <div class="renewal-date">18 Jun 2025</div>
-                <div class="renewal-days">(30 days left)</div>
-              </div>
-              <div class="row-actions">
-                <button type="button" class="btn-view">View Details</button>
-                <button type="button" class="btn-kebab">⋮</button>
-              </div>
-            </div>
-
-            <div class="product-row">
-              <div class="product-icon icon-erp">🏢</div>
-              <div>
-                <div class="product-name-row">
-                  <span class="product-name">QuickERP</span>
-                  <span class="badge-active">Active</span>
-                </div>
-                <div class="product-desc">Enterprise Resource Planning</div>
-                <div class="product-sub">Complete business management solution</div>
-              </div>
-              <div class="plan-col">
-                <div class="plan-label">Plan</div>
-                <div class="plan-value">Enterprise</div>
-              </div>
-              <div class="renewal-col">
-                <div class="renewal-label">Next Renewal</div>
-                <div class="renewal-date">18 Aug 2025</div>
-                <div class="renewal-days">(91 days left)</div>
-              </div>
-              <div class="row-actions">
-                <button type="button" class="btn-view">View Details</button>
-                <button type="button" class="btn-kebab">⋮</button>
-              </div>
-            </div>
-
-            <div class="product-row">
-              <div class="product-icon icon-crm">👥</div>
-              <div>
-                <div class="product-name-row">
-                  <span class="product-name">QuickCRM</span>
-                  <span class="badge-active">Active</span>
-                </div>
-                <div class="product-desc">Customer Relationship Management</div>
-                <div class="product-sub">Manage leads, customers &amp; pipelines</div>
-              </div>
-              <div class="plan-col">
-                <div class="plan-label">Plan</div>
-                <div class="plan-value">Professional</div>
-              </div>
-              <div class="renewal-col">
-                <div class="renewal-label">Next Renewal</div>
-                <div class="renewal-date">18 Jun 2025</div>
-                <div class="renewal-days">(30 days left)</div>
-              </div>
-              <div class="row-actions">
-                <button type="button" class="btn-view">View Details</button>
-                <button type="button" class="btn-kebab">⋮</button>
-              </div>
-            </div>
-
-            <div class="product-row">
-              <div class="product-icon icon-inventory">📦</div>
-              <div>
-                <div class="product-name-row">
-                  <span class="product-name">QuickInventory</span>
-                  <span class="badge-active">Active</span>
-                </div>
-                <div class="product-desc">Inventory &amp; Warehouse Management</div>
-                <div class="product-sub">Real-time stock tracking &amp; management</div>
-              </div>
-              <div class="plan-col">
-                <div class="plan-label">Plan</div>
-                <div class="plan-value">Advanced</div>
-              </div>
-              <div class="renewal-col">
-                <div class="renewal-label">Next Renewal</div>
-                <div class="renewal-date">18 Jun 2025</div>
-                <div class="renewal-days">(30 days left)</div>
-              </div>
-              <div class="row-actions">
-                <button type="button" class="btn-view">View Details</button>
-                <button type="button" class="btn-kebab">⋮</button>
-              </div>
-            </div>
-
-            <div class="product-row">
-              <div class="product-icon icon-hr">👤</div>
-              <div>
-                <div class="product-name-row">
-                  <span class="product-name">QuickHR</span>
-                  <span class="badge-active">Active</span>
-                </div>
-                <div class="product-desc">HR &amp; Payroll Management</div>
-                <div class="product-sub">Employee management and payroll processing</div>
-              </div>
-              <div class="plan-col">
-                <div class="plan-label">Plan</div>
-                <div class="plan-value">Standard</div>
-              </div>
-              <div class="renewal-col">
-                <div class="renewal-label">Next Renewal</div>
-                <div class="renewal-date">18 Jul 2025</div>
-                <div class="renewal-days">(60 days left)</div>
-              </div>
-              <div class="row-actions">
-                <button type="button" class="btn-view">View Details</button>
-                <button type="button" class="btn-kebab">⋮</button>
-              </div>
-            </div>
-
-            <div class="product-row">
-              <div class="product-icon icon-analytics">📊</div>
-              <div>
-                <div class="product-name-row">
-                  <span class="product-name">QuickAnalytics</span>
-                  <span class="badge-active">Active</span>
-                </div>
-                <div class="product-desc">Business Intelligence &amp; Analytics</div>
-                <div class="product-sub">Insights, dashboards and advanced reports</div>
-              </div>
-              <div class="plan-col">
-                <div class="plan-label">Plan</div>
-                <div class="plan-value">Advanced</div>
-              </div>
-              <div class="renewal-col">
-                <div class="renewal-label">Next Renewal</div>
-                <div class="renewal-date">18 Jul 2025</div>
-                <div class="renewal-days">(60 days left)</div>
-              </div>
-              <div class="row-actions">
-                <button type="button" class="btn-view">View Details</button>
-                <button type="button" class="btn-kebab">⋮</button>
-              </div>
-            </div>
-          </div>
-
+          <div class="panel" id="productsContainer"></div>
           <div class="promo-banner">
             <div class="promo-left">
               <div class="promo-icon">🛡️</div>
@@ -287,27 +136,8 @@
           <div class="side-card">
             <h3>Renewal Calendar</h3>
             <div class="calendar-item">
-              <div class="calendar-date-row">
-                <span class="calendar-date">18 Jun 2025</span>
-                <span class="calendar-days">30 days</span>
-              </div>
-              <div class="calendar-products">QuickPOS, QuickInventory</div>
+              <div class="calendar-products" style="color:var(--text-muted);font-size:0.9rem;">Renewal calendar will be available soon.</div>
             </div>
-            <div class="calendar-item">
-              <div class="calendar-date-row">
-                <span class="calendar-date">18 Jul 2025</span>
-                <span class="calendar-days">60 days</span>
-              </div>
-              <div class="calendar-products">QuickHR, QuickAnalytics</div>
-            </div>
-            <div class="calendar-item">
-              <div class="calendar-date-row">
-                <span class="calendar-date">18 Aug 2025</span>
-                <span class="calendar-days">91 days</span>
-              </div>
-              <div class="calendar-products">QuickERP</div>
-            </div>
-            <div class="view-full-link">View full calendar →</div>
           </div>
 
           <div class="side-card">
@@ -344,7 +174,8 @@
     </footer>
   </div>
 
-  <script src="../shared/dashboard-shared.js"></script>
+  <script src="../shared/api.js"></script>
+  <script src="../shared/portal-utils.js"></script>
+  <script src="my-products.js"></script>
 </body>
 </html>
-

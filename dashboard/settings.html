@@ -60,12 +60,12 @@
         <span class="kbd-hint">Ctrl + /</span>
       </div>
       <div class="topbar-right">
-        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge" style="display:none"></span></button>
         <button class="company-select" type="button">
-          <span class="company-avatar">AC</span>
+          <span class="company-avatar">…</span>
           <span class="company-meta">
-            <strong>Aarav Corp. Ltd.</strong>
-            <span>Customer ID: CUST-100245</span>
+            <strong>Loading…</strong>
+            <span>Customer ID: —</span>
           </span>
           <span>▾</span>
         </button>
@@ -94,51 +94,52 @@
 
             <div class="profile-id-row">
               <div class="profile-avatar-wrap">
-                <div class="profile-avatar">AC</div>
-                <button type="button" class="avatar-edit-btn" aria-label="Change photo">📷</button>
+                <div class="profile-avatar" id="profileAvatar">…</div>
               </div>
               <div>
                 <div class="profile-id-name-row">
-                  <span class="profile-id-name">Aarav Corp. Ltd.</span>
+                  <span class="profile-id-name" id="profileBizName">Loading…</span>
                   <span class="badge-verified">✓ Verified</span>
                 </div>
-                <div class="profile-id-meta">Customer ID: CUST-100245<br />Since 12 Jan 2024</div>
+                <div class="profile-id-meta">Customer ID: <span id="profileClientId">—</span><br />Member since: <span id="profileSince">—</span></div>
+                <div id="profileStatusBadge" style="margin-top:0.3rem;"></div>
               </div>
             </div>
 
             <form id="profileForm">
+              <div id="profileSaveMsg" style="margin-bottom:0.75rem;font-size:0.9rem;"></div>
               <div class="form-grid">
                 <div class="form-field">
                   <label for="orgName">Organization Name</label>
-                  <input type="text" id="orgName" name="orgName" value="Aarav Corp. Ltd." />
+                  <input type="text" id="orgName" name="business_name" placeholder="Loading…" />
                 </div>
                 <div class="form-field">
-                  <label for="contactPerson">Contact Person</label>
-                  <input type="text" id="contactPerson" name="contactPerson" value="Rahul Sharma" />
+                  <label for="contactPerson">Contact Person <span class="optional">(Not supported)</span></label>
+                  <input type="text" id="contactPerson" name="contactPerson" disabled placeholder="Coming soon" title="Not yet supported by the backend" />
                 </div>
                 <div class="form-field">
                   <label for="email">Email Address</label>
-                  <input type="email" id="email" name="email" value="billing@aaravcorp.com" />
+                  <input type="email" id="email" name="email" placeholder="Loading…" />
                 </div>
                 <div class="form-field">
                   <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" value="+91 98123 45678" />
+                  <input type="tel" id="phone" name="phone" placeholder="Loading…" />
                 </div>
                 <div class="form-field full">
-                  <label for="address">Address</label>
-                  <textarea id="address" name="address" rows="2">301, 3rd Floor, Tower B, Cyber Park, Sector 62, Noida, Uttar Pradesh - 201309</textarea>
+                  <label for="address">Address <span class="optional">(Not supported)</span></label>
+                  <textarea id="address" name="address" rows="2" disabled placeholder="Coming soon — address is not yet supported by the backend"></textarea>
                 </div>
                 <div class="form-field">
-                  <label for="gstin">GSTIN <span class="optional">(Optional)</span></label>
-                  <input type="text" id="gstin" name="gstin" value="09AABCA1234B1Z5" />
+                  <label for="gstin">GSTIN <span class="optional">(Not supported)</span></label>
+                  <input type="text" id="gstin" name="gstin" disabled placeholder="Coming soon" title="Not yet supported by the backend" />
                 </div>
                 <div class="form-field">
-                  <label for="pan">PAN <span class="optional">(Optional)</span></label>
-                  <input type="text" id="pan" name="pan" value="AABCA1234B" />
+                  <label for="pan">PAN <span class="optional">(Not supported)</span></label>
+                  <input type="text" id="pan" name="pan" disabled placeholder="Coming soon" title="Not yet supported by the backend" />
                 </div>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn-primary">Save Changes</button>
+                <button type="submit" class="btn-primary" id="profileSaveBtn">Save Changes</button>
               </div>
             </form>
           </div>
@@ -150,35 +151,16 @@
               <div class="sub-overview-icon">📅</div>
               <h3>Subscription Overview</h3>
             </div>
-            <div class="sub-label">Current Plan</div>
-            <div class="sub-plan-row">
-              <span class="sub-plan-name">Professional Plan</span>
-              <span class="badge-active">Active</span>
-            </div>
-            <div class="sub-label">Next Renewal</div>
-            <div class="sub-renewal-days">18 Jun 2025 (30 days left)</div>
-            <button type="button" class="btn-full-link">View My Products →</button>
+            <div class="sub-label">Subscription</div>
+            <div class="sub-renewal-days">View your active products for subscription details.</div>
+            <a href="my-products.html" class="btn-full-link">View My Products →</a>
           </div>
 
           <div class="side-card">
             <h3 style="margin-bottom:1rem;">Profile Completion</h3>
-            <div class="completion-row">
-              <div class="completion-ring">
-                <svg width="96" height="96" viewBox="0 0 96 96">
-                  <circle cx="48" cy="48" r="40" fill="none" stroke="var(--track)" stroke-width="9" />
-                  <circle cx="48" cy="48" r="40" fill="none" stroke="var(--primary)" stroke-width="9"
-                    stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="37.7" />
-                </svg>
-                <div class="completion-ring-label">85%</div>
-              </div>
-              <ul class="completion-list">
-                <li><span class="completion-check done">✓</span> Organization Details</li>
-                <li><span class="completion-check done">✓</span> Contact Information</li>
-                <li><span class="completion-check done">✓</span> Billing Information</li>
-                <li><span class="completion-check todo"></span> Profile Picture</li>
-              </ul>
+            <div style="color:var(--text-muted);font-size:0.9rem;">
+              Profile completion tracking will be available soon.
             </div>
-            <div class="completion-note">Great job! Your profile is almost complete.</div>
           </div>
 
           <div class="side-card">
@@ -208,6 +190,8 @@
     </footer>
   </div>
 
+  <script src="../shared/api.js"></script>
+  <script src="../shared/portal-utils.js"></script>
   <script src="profile-settings.js"></script>
 </body>
 </html>

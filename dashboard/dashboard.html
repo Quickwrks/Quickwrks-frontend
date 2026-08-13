@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard – QuickWrks Customer Portal</title>
   <link rel="stylesheet" href="dashboard.css" />
-  
+
 </head>
 <body>
   <!--
@@ -53,12 +53,12 @@
     <header class="topbar">
       <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
       <div class="topbar-right">
-        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge" style="display:none"></span></button>
         <button class="company-select" type="button">
-          <span class="company-avatar">AC</span>
+          <span class="company-avatar">…</span>
           <span class="company-meta">
-            <strong>Aarav Corp. Ltd.</strong>
-            <span>Customer ID: CUST-100245</span>
+            <strong>Loading…</strong>
+            <span>Customer ID: —</span>
           </span>
           <span>▾</span>
         </button>
@@ -67,7 +67,7 @@
 
     <div class="content">
       <div class="page-header">
-        <h1>Welcome back, Aarav! 👋</h1>
+        <h1>Welcome back, <span id="welcomeName">…</span> 👋</h1>
         <p>Here's what's happening with your account today.</p>
       </div>
 
@@ -75,23 +75,23 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Due</div>
-            <div class="stat-value">₹48,750.00</div>
-            <div class="stat-sub danger">2 Invoices</div>
+            <div class="stat-value" id="statTotalDue">—</div>
+            <div class="stat-sub danger" id="statDueCount">—</div>
           </div>
           <div class="stat-icon green">₹</div>
         </div>
         <div class="stat-card">
           <div>
             <div class="stat-label">Paid This Year</div>
-            <div class="stat-value">₹2,45,600.00</div>
-            <div class="stat-sub success">12 Invoices</div>
+            <div class="stat-value" id="statPaidThisYear">—</div>
+            <div class="stat-sub success" id="statPaidCount">—</div>
           </div>
           <div class="stat-icon blue">💳</div>
         </div>
         <div class="stat-card">
           <div>
             <div class="stat-label">Active Products</div>
-            <div class="stat-value">6</div>
+            <div class="stat-value" id="statActiveProducts">—</div>
             <div class="stat-sub">View all products</div>
           </div>
           <div class="stat-icon purple">✓</div>
@@ -99,8 +99,8 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Support Tickets</div>
-            <div class="stat-value">3</div>
-            <div class="stat-sub"><span style="color:var(--danger)">2 Open</span> · 1 Resolved</div>
+            <div class="stat-value" id="statSupportTickets">—</div>
+            <div class="stat-sub" id="statTicketDetails">—</div>
           </div>
           <div class="stat-icon orange">🎧</div>
         </div>
@@ -108,109 +108,36 @@
 
       <div class="grid-2">
         <div class="panel">
-          <div class="panel-header"><h3>Recent Updates</h3><a href="#">View all</a></div>
-          <div class="update-item">
-            <div class="update-icon green">📢</div>
-            <div class="update-body">
-              <div class="update-title">Scheduled Maintenance – 18 May 2025 <span class="tag">New</span></div>
-              <div class="update-desc">Our platform will undergo maintenance on 18th May 2025, 12:00 AM to 4:00 AM IST.</div>
-            </div>
-            <div class="update-meta">16 May 2025</div>
-          </div>
-          <div class="update-item">
-            <div class="update-icon purple">📦</div>
-            <div class="update-body">
-              <div class="update-title">New Feature: Advanced Reporting <span class="tag">New</span></div>
-              <div class="update-desc">Advanced reporting is now live! Generate detailed insights with custom filters and export options.</div>
-            </div>
-            <div class="update-meta">15 May 2025</div>
-          </div>
-          <div class="update-item">
-            <div class="update-icon blue">📄</div>
-            <div class="update-body">
-              <div class="update-title">GST Compliance Module Update</div>
-              <div class="update-desc">New enhancements to GST reports and e-invoice reconciliation are now live.</div>
-            </div>
-            <div class="update-meta">10 May 2025</div>
+          <div class="panel-header"><h3>Recent Updates</h3><a href="my-updates.html">View all</a></div>
+          <div style="padding:1.25rem;text-align:center;color:var(--text-muted,#888);font-size:0.9rem;">
+            📋 System announcements are coming soon. Check back here for the latest updates.
           </div>
         </div>
 
         <div class="panel">
-          <div class="panel-header"><h3>Due Invoices</h3><a href="#">View all</a></div>
-          <div class="invoice-item">
-            <div class="invoice-body">
-              <div class="invoice-id">INV-2025-0148</div>
-              <div class="invoice-name">QuickERP Subscription</div>
-            </div>
-            <div>
-              <div class="invoice-due">Due on 30 May 2025</div>
-              <div class="invoice-amt">₹28,750.00</div>
-            </div>
-            <button class="btn-pay" type="button">Pay Now</button>
-          </div>
-          <div class="invoice-item">
-            <div class="invoice-body">
-              <div class="invoice-id">INV-2025-0132</div>
-              <div class="invoice-name">QuickHR Subscription</div>
-            </div>
-            <div>
-              <div class="invoice-due">Due on 16 May 2025</div>
-              <div class="invoice-amt">₹20,000.00</div>
-            </div>
-            <button class="btn-pay" type="button">Pay Now</button>
-          </div>
-          <button class="btn-pay-all" type="button">Pay All Now (₹48,750.00)</button>
+          <div class="panel-header"><h3>Due Invoices</h3><a href="invoices.html">View all</a></div>
+          <div id="dueInvoicesList"></div>
         </div>
       </div>
 
       <div class="grid-3">
         <div class="panel">
-          <div class="panel-header"><h3>Recent Transactions</h3><a href="#">View all</a></div>
+          <div class="panel-header"><h3>Recent Transactions</h3><a href="transactions.html">View all</a></div>
           <div style="overflow-x:auto">
             <table class="tx-table">
               <thead>
-                <tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr>
+                <tr><th>Date</th><th>Description</th><th>Amount</th><th>Type</th></tr>
               </thead>
-              <tbody>
-                <tr><td>10 Apr 2025</td><td>Payment for INV-2025-0112</td><td>₹20,000.00</td><td><span class="status-paid">Paid</span></td></tr>
-                <tr><td>12 Mar 2025</td><td>Payment for INV-2025-0101</td><td>₹15,000.00</td><td><span class="status-paid">Paid</span></td></tr>
-                <tr><td>11 Feb 2025</td><td>Payment for INV-2025-0087</td><td>₹18,750.00</td><td><span class="status-paid">Paid</span></td></tr>
-                <tr><td>15 Jan 2025</td><td>Payment for INV-2025-0070</td><td>₹12,500.00</td><td><span class="status-paid">Paid</span></td></tr>
-                <tr><td>10 Dec 2024</td><td>Payment for INV-2024-0056</td><td>₹10,000.00</td><td><span class="status-paid">Paid</span></td></tr>
-              </tbody>
+              <tbody id="recentTxnBody"></tbody>
             </table>
           </div>
-          <a href="#" class="see-all">View all transactions</a>
+          <a href="transactions.html" class="see-all">View all transactions</a>
         </div>
 
         <div class="panel">
-          <div class="panel-header"><h3>My Products</h3><a href="#">View all</a></div>
-          <div class="product-item">
-            <div class="product-icon blue">💼</div>
-            <div class="product-info"><div class="product-name">QuickERP</div><div class="product-plan">Enterprise Plan</div></div>
-            <span class="status-active">Active</span>
-          </div>
-          <div class="product-item">
-            <div class="product-icon green">🖥️</div>
-            <div class="product-info"><div class="product-name">QuickPOS</div><div class="product-plan">Premium Plan</div></div>
-            <span class="status-active">Active</span>
-          </div>
-          <div class="product-item">
-            <div class="product-icon purple">👥</div>
-            <div class="product-info"><div class="product-name">QuickCRM</div><div class="product-plan">Professional Plan</div></div>
-            <span class="status-active">Active</span>
-          </div>
-          <div class="product-item">
-            <div class="product-icon blue">👤</div>
-            <div class="product-info"><div class="product-name">QuickHR</div><div class="product-plan">Standard Plan</div></div>
-            <span class="status-active">Active</span>
-          </div>
-          <div class="product-item">
-            <div class="product-icon orange">📦</div>
-            <div class="product-info"><div class="product-name">QuickInventory</div><div class="product-plan">Advanced Plan</div></div>
-            <span class="status-active">Active</span>
-          </div>
-          <a href="#" class="see-all">View all products</a>
+          <div class="panel-header"><h3>My Products</h3><a href="my-products.html">View all</a></div>
+          <div id="productsList"></div>
+          <a href="my-products.html" class="see-all">View all products</a>
         </div>
 
         <div class="panel">
@@ -250,6 +177,8 @@
     </footer>
   </div>
 
+  <script src="../shared/api.js"></script>
+  <script src="../shared/portal-utils.js"></script>
   <script src="dashboard.js"></script>
 </body>
 </html>

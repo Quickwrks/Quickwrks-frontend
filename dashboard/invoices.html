@@ -52,12 +52,12 @@
     <header class="topbar">
       <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
       <div class="topbar-right">
-        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge" style="display:none"></span></button>
         <button class="company-select" type="button">
-          <span class="company-avatar">AC</span>
+          <span class="company-avatar">…</span>
           <span class="company-meta">
-            <strong>Aarav Corp. Ltd.</strong>
-            <span>Customer ID: CUST-100245</span>
+            <strong>Loading…</strong>
+            <span>Customer ID: —</span>
           </span>
           <span>▾</span>
         </button>
@@ -74,32 +74,32 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Due</div>
-            <div class="stat-value">₹48,750.00</div>
-            <div class="stat-sub danger">2 Invoices</div>
+            <div class="stat-value" id="invStatTotalDue">—</div>
+            <div class="stat-sub danger">Outstanding</div>
           </div>
           <div class="stat-icon green">₹</div>
         </div>
         <div class="stat-card">
           <div>
             <div class="stat-label">Paid This Year</div>
-            <div class="stat-value">₹2,45,600.00</div>
-            <div class="stat-sub success">12 Invoices</div>
+            <div class="stat-value" id="invStatPaidYear">—</div>
+            <div class="stat-sub success">Payments received</div>
           </div>
           <div class="stat-icon blue">💳</div>
         </div>
         <div class="stat-card">
           <div>
             <div class="stat-label">Overdue</div>
-            <div class="stat-value">₹18,750.00</div>
-            <div class="stat-sub danger">1 Invoice</div>
+            <div class="stat-value" id="invStatOverdue">—</div>
+            <div class="stat-sub danger">Past due date</div>
           </div>
           <div class="stat-icon purple">✓</div>
         </div>
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Paid</div>
-            <div class="stat-value">₹2,45,600.00</div>
-            <div class="stat-sub">Last payment: 10 May 2025</div>
+            <div class="stat-value" id="invStatTotalPaid">—</div>
+            <div class="stat-sub">All time</div>
           </div>
           <div class="stat-icon orange">👛</div>
         </div>
@@ -107,26 +107,24 @@
 
       <div class="toolbar">
         <div class="tabs">
-          <button type="button" class="tab active" data-tab="outstanding">Outstanding (2)</button>
-          <button type="button" class="tab" data-tab="paid">Paid Invoices (12)</button>
-          <button type="button" class="tab" data-tab="all">All Invoices (14)</button>
+          <button type="button" class="tab active" data-tab="outstanding">Outstanding (<span id="tabCountOutstanding">—</span>)</button>
+          <button type="button" class="tab" data-tab="paid">Paid Invoices (<span id="tabCountPaid">—</span>)</button>
+          <button type="button" class="tab" data-tab="all">All Invoices (<span id="tabCountAll">—</span>)</button>
         </div>
         <div class="toolbar-actions">
-          <button type="button" class="btn-outline">↓ Download Statement</button>
-          <button type="button" class="btn-primary">Pay All Now (₹48,750.00)</button>
+          <button type="button" class="btn-outline" disabled title="Coming soon">↓ Download Statement</button>
+          <button type="button" class="btn-primary" disabled title="Online payment coming soon">Pay All Now</button>
         </div>
       </div>
 
       <div class="layout-2">
         <div>
-          <!-- Outstanding -->
-          <div class="panel" id="panelOutstanding">
-            <h2 class="panel-title">Outstanding Invoices</h2>
+          <div class="panel">
+            <h2 class="panel-title">All Invoices</h2>
             <div class="table-scroll">
               <table class="data-table">
                 <thead>
                   <tr>
-                    <th style="width:28px"><input type="checkbox" aria-label="Select all" /></th>
                     <th>Invoice #</th>
                     <th>Invoice Date</th>
                     <th>Due Date</th>
@@ -135,123 +133,8 @@
                     <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td data-label=""><input type="checkbox" aria-label="Select INV-2025-0148" /></td>
-                    <td data-label="Invoice #">
-                      <div>
-                        <div class="inv-id">INV-2025-0148</div>
-                        <div class="inv-sub">Subscription – QuickERP</div>
-                      </div>
-                    </td>
-                    <td data-label="Invoice Date">15 May 2025</td>
-                    <td data-label="Due Date">
-                      <div>30 May 2025<br /><span class="due-warn">15 days left</span></div>
-                    </td>
-                    <td data-label="Amount"><strong>₹28,750.00</strong></td>
-                    <td data-label="Status"><span class="badge-status badge-due">Due Soon</span></td>
-                    <td data-label="Actions">
-                      <div class="actions-cell">
-                        <button type="button" class="btn-sm">👁 View</button>
-                        <button type="button" class="btn-sm pay">Pay Now</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td data-label=""><input type="checkbox" aria-label="Select INV-2025-0132" /></td>
-                    <td data-label="Invoice #">
-                      <div>
-                        <div class="inv-id">INV-2025-0132</div>
-                        <div class="inv-sub">Subscription – QuickHR</div>
-                      </div>
-                    </td>
-                    <td data-label="Invoice Date">01 May 2025</td>
-                    <td data-label="Due Date">
-                      <div>16 May 2025<br /><span class="due-warn">1 day overdue</span></div>
-                    </td>
-                    <td data-label="Amount"><strong>₹20,000.00</strong></td>
-                    <td data-label="Status"><span class="badge-status badge-overdue">Overdue</span></td>
-                    <td data-label="Actions">
-                      <div class="actions-cell">
-                        <button type="button" class="btn-sm">👁 View</button>
-                        <button type="button" class="btn-sm pay">Pay Now</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="invoiceTbody"></tbody>
               </table>
-            </div>
-            <div class="table-footer">
-              <span>Showing 1 to 2 of 2 invoices</span>
-              <div class="page-btns">
-                <button type="button" class="page-btn" disabled>‹</button>
-                <button type="button" class="page-btn active">1</button>
-                <button type="button" class="page-btn">›</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recently Paid -->
-          <div class="panel">
-            <h2 class="panel-title">Recently Paid Invoices</h2>
-            <div class="table-scroll">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>Invoice #</th>
-                    <th>Invoice Date</th>
-                    <th>Paid Date</th>
-                    <th>Amount</th>
-                    <th>Payment Method</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="Invoice #">
-                      <div>
-                        <div class="inv-id">INV-2025-0112</div>
-                        <div class="inv-sub">QuickPOS Subscription</div>
-                      </div>
-                    </td>
-                    <td data-label="Invoice Date">10 Apr 2025</td>
-                    <td data-label="Paid Date">10 Apr 2025</td>
-                    <td data-label="Amount"><strong>₹20,000.00</strong></td>
-                    <td data-label="Payment Method"><span class="method-logo" style="color:#097939">UPI</span> UPI</td>
-                    <td data-label="Actions"><button type="button" class="btn-sm">↓ Download</button></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Invoice #">
-                      <div>
-                        <div class="inv-id">INV-2025-0101</div>
-                        <div class="inv-sub">QuickInventory Subscription</div>
-                      </div>
-                    </td>
-                    <td data-label="Invoice Date">10 Mar 2025</td>
-                    <td data-label="Paid Date">12 Mar 2025</td>
-                    <td data-label="Amount"><strong>₹15,000.00</strong></td>
-                    <td data-label="Payment Method"><span class="method-logo method-visa">VISA</span> •••• 4242</td>
-                    <td data-label="Actions"><button type="button" class="btn-sm">↓ Download</button></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Invoice #">
-                      <div>
-                        <div class="inv-id">INV-2025-0087</div>
-                        <div class="inv-sub">CRM Subscription</div>
-                      </div>
-                    </td>
-                    <td data-label="Invoice Date">10 Feb 2025</td>
-                    <td data-label="Paid Date">11 Feb 2025</td>
-                    <td data-label="Amount"><strong>₹18,750.00</strong></td>
-                    <td data-label="Payment Method"><span class="method-logo method-mc">MC</span> Mastercard •••• 9987</td>
-                    <td data-label="Actions"><button type="button" class="btn-sm">↓ Download</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="table-footer">
-              <span>Showing 1 to 3 of 12 invoices</span>
-              <button type="button" class="btn-outline">View All Paid Invoices</button>
             </div>
           </div>
         </div>
@@ -296,6 +179,8 @@
     </footer>
   </div>
 
-  <script src="../shared/dashboard-shared.js"></script>
+  <script src="../shared/api.js"></script>
+  <script src="../shared/portal-utils.js"></script>
+  <script src="invoices.js"></script>
 </body>
 </html>

@@ -53,12 +53,12 @@
     <header class="topbar">
       <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
       <div class="topbar-right">
-        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge" style="display:none"></span></button>
         <button class="company-select" type="button">
-          <span class="company-avatar">AC</span>
+          <span class="company-avatar">…</span>
           <span class="company-meta">
-            <strong>Aarav Corp. Ltd.</strong>
-            <span>Customer ID: CUST-100245</span>
+            <strong>Loading…</strong>
+            <span>Customer ID: —</span>
           </span>
           <span>▾</span>
         </button>
@@ -73,15 +73,15 @@
 
       <div class="toolbar">
         <div class="tabs">
-          <button type="button" class="tab active" data-tab="all">All Tickets (7)</button>
-          <button type="button" class="tab" data-tab="open">Open (2)</button>
-          <button type="button" class="tab" data-tab="progress">In Progress (2)</button>
-          <button type="button" class="tab" data-tab="hold">On Hold (1)</button>
-          <button type="button" class="tab" data-tab="resolved">Resolved (2)</button>
-          <button type="button" class="tab" data-tab="closed">Closed (0)</button>
+          <button type="button" class="tab active" data-tab="all">All Tickets (<span id="tkCountAll">—</span>)</button>
+          <button type="button" class="tab" data-tab="open">Open (<span id="tkCountOpen">—</span>)</button>
+          <button type="button" class="tab" data-tab="in_progress">In Progress (<span id="tkCountProgress">—</span>)</button>
+          <button type="button" class="tab" data-tab="on_hold">On Hold (<span id="tkCountHold">—</span>)</button>
+          <button type="button" class="tab" data-tab="resolved">Resolved (<span id="tkCountResolved">—</span>)</button>
+          <button type="button" class="tab" data-tab="closed">Closed (<span id="tkCountClosed">—</span>)</button>
         </div>
         <div class="toolbar-actions">
-          <button type="button" class="btn-primary">⊕ Create New Ticket</button>
+          <button type="button" class="btn-primary" id="btnCreateTicket">⊕ Create New Ticket</button>
         </div>
       </div>
 
@@ -89,7 +89,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Tickets</div>
-            <div class="stat-value">7</div>
+            <div class="stat-value" id="tkStatTotal">—</div>
             <div class="stat-sub">All time</div>
           </div>
           <div class="stat-icon green">🗒️</div>
@@ -97,7 +97,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Open Tickets</div>
-            <div class="stat-value">2</div>
+            <div class="stat-value" id="tkStatOpen">—</div>
             <div class="stat-sub warning">Require your action</div>
           </div>
           <div class="stat-icon orange">⏳</div>
@@ -105,7 +105,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">In Progress</div>
-            <div class="stat-value">2</div>
+            <div class="stat-value" id="tkStatProgress">—</div>
             <div class="stat-sub info">Being worked on</div>
           </div>
           <div class="stat-icon blue">◯</div>
@@ -113,7 +113,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Resolved</div>
-            <div class="stat-value">2</div>
+            <div class="stat-value" id="tkStatResolved">—</div>
             <div class="stat-sub success">Last 30 days</div>
           </div>
           <div class="stat-icon purple">✓</div>
@@ -121,7 +121,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Closed</div>
-            <div class="stat-value">0</div>
+            <div class="stat-value" id="tkStatClosed">—</div>
             <div class="stat-sub">Last 30 days</div>
           </div>
           <div class="stat-icon gray">📅</div>
@@ -137,120 +137,12 @@
                   <tr>
                     <th>Ticket ID</th>
                     <th>Subject</th>
-                    <th>Category</th>
                     <th>Status</th>
-                    <th>Priority</th>
-                    <th>Updated On</th>
-                    <th></th>
+                    <th>Created</th>
+                    <th>Updated</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0057</div>
-                      <div class="tkt-sub">Created on 18 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Unable to download invoice</div>
-                      <div class="subject-desc">I am facing an issue while trying to download...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-billing">🧾</span> Billing &amp; Invoices</span></td>
-                    <td data-label="Status"><span class="badge-status badge-open">Open</span></td>
-                    <td data-label="Priority"><span class="priority high">↑ High</span></td>
-                    <td data-label="Updated On"><div class="updated-on">18 May 2025</div><div class="updated-time">10:30 AM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0056</div>
-                      <div class="tkt-sub">Created on 17 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Payment not reflecting</div>
-                      <div class="subject-desc">I have made a payment but it is not showing...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-payments">💳</span> Payments</span></td>
-                    <td data-label="Status"><span class="badge-status badge-progress">In Progress</span></td>
-                    <td data-label="Priority"><span class="priority high">↑ High</span></td>
-                    <td data-label="Updated On"><div class="updated-on">18 May 2025</div><div class="updated-time">09:15 AM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0055</div>
-                      <div class="tkt-sub">Created on 15 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Access issue to QuickERP</div>
-                      <div class="subject-desc">I am unable to login to my QuickERP account...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-access">🔑</span> Product Access</span></td>
-                    <td data-label="Status"><span class="badge-status badge-progress">In Progress</span></td>
-                    <td data-label="Priority"><span class="priority medium">− Medium</span></td>
-                    <td data-label="Updated On"><div class="updated-on">17 May 2025</div><div class="updated-time">04:20 PM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0054</div>
-                      <div class="tkt-sub">Created on 12 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Feature request: Custom Reports</div>
-                      <div class="subject-desc">We would like to request custom reporting...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-feature">✨</span> Feature Request</span></td>
-                    <td data-label="Status"><span class="badge-status badge-hold">On Hold</span></td>
-                    <td data-label="Priority"><span class="priority low">↓ Low</span></td>
-                    <td data-label="Updated On"><div class="updated-on">16 May 2025</div><div class="updated-time">11:45 AM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0053</div>
-                      <div class="tkt-sub">Created on 10 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Incorrect tax calculation in invoice</div>
-                      <div class="subject-desc">Tax is not being calculated correctly for...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-billing">🧾</span> Billing &amp; Invoices</span></td>
-                    <td data-label="Status"><span class="badge-status badge-resolved">Resolved</span></td>
-                    <td data-label="Priority"><span class="priority high">↑ High</span></td>
-                    <td data-label="Updated On"><div class="updated-on">14 May 2025</div><div class="updated-time">02:30 PM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0052</div>
-                      <div class="tkt-sub">Created on 05 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Request for training session</div>
-                      <div class="subject-desc">We would like to schedule a training session...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-training">🎓</span> Training &amp; Onboarding</span></td>
-                    <td data-label="Status"><span class="badge-status badge-resolved">Resolved</span></td>
-                    <td data-label="Priority"><span class="priority medium">− Medium</span></td>
-                    <td data-label="Updated On"><div class="updated-on">08 May 2025</div><div class="updated-time">03:10 PM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                  <tr>
-                    <td data-label="Ticket ID">
-                      <div class="tkt-id">TKT-2025-0049</div>
-                      <div class="tkt-sub">Created on 01 May 2025</div>
-                    </td>
-                    <td data-label="Subject">
-                      <div class="subject-title">Data migration query</div>
-                      <div class="subject-desc">Need clarification on data migration process...</div>
-                    </td>
-                    <td data-label="Category"><span class="category-tag"><span class="category-dot cat-implementation">🧩</span> Implementation</span></td>
-                    <td data-label="Status"><span class="badge-status badge-resolved">Resolved</span></td>
-                    <td data-label="Priority"><span class="priority low">↓ Low</span></td>
-                    <td data-label="Updated On"><div class="updated-on">03 May 2025</div><div class="updated-time">10:05 AM</div></td>
-                    <td class="row-arrow">›</td>
-                  </tr>
-                </tbody>
+                <tbody id="ticketTbody"></tbody>
               </table>
             </div>
             <div class="table-footer">
@@ -312,6 +204,33 @@
     </footer>
   </div>
 
-  <script src="../shared/dashboard-shared.js"></script>
+  <!-- Create Ticket Modal -->
+  <div id="createTicketModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-card,#fff);border-radius:12px;padding:2rem;max-width:480px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.15);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <h3 style="margin:0;">Create Support Ticket</h3>
+        <button type="button" id="closeTicketModal" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted,#888)">×</button>
+      </div>
+      <form id="createTicketForm">
+        <div class="form-field" style="margin-bottom:1rem;">
+          <label for="ticketSubject" style="display:block;margin-bottom:0.4rem;font-weight:500;font-size:0.9rem;">Subject <span style="color:var(--danger);">*</span></label>
+          <input type="text" id="ticketSubject" name="subject" required minlength="5" maxlength="200" placeholder="Briefly describe your issue" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--border);border-radius:8px;background:var(--bg,#f9f9f9);color:var(--text);font-family:inherit;font-size:0.9rem;box-sizing:border-box;" />
+        </div>
+        <div class="form-field" style="margin-bottom:1rem;">
+          <label for="ticketBody" style="display:block;margin-bottom:0.4rem;font-weight:500;font-size:0.9rem;">Description <span style="color:var(--danger);">*</span></label>
+          <textarea id="ticketBody" name="body" required minlength="10" maxlength="5000" rows="5" placeholder="Please describe your issue in detail..." style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--border);border-radius:8px;background:var(--bg,#f9f9f9);color:var(--text);font-family:inherit;font-size:0.9rem;resize:vertical;box-sizing:border-box;"></textarea>
+        </div>
+        <div id="createTicketMsg" style="margin-bottom:0.75rem;font-size:0.9rem;"></div>
+        <div style="display:flex;gap:0.75rem;justify-content:flex-end;">
+          <button type="button" id="closeTicketModal2" onclick="document.getElementById('createTicketModal').style.display='none'" style="padding:0.55rem 1.2rem;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer;font-family:inherit;">Cancel</button>
+          <button type="submit" class="btn-primary" style="padding:0.55rem 1.4rem;">Submit Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../shared/api.js"></script>
+  <script src="../shared/portal-utils.js"></script>
+  <script src="support-tickets.js"></script>
 </body>
 </html>

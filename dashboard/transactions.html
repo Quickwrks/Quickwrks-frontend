@@ -51,12 +51,12 @@
     <header class="topbar">
       <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
       <div class="topbar-right">
-        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <button class="btn-icon" type="button" aria-label="Notifications">🔔<span class="badge" style="display:none"></span></button>
         <button class="company-select" type="button">
-          <span class="company-avatar">AC</span>
+          <span class="company-avatar">…</span>
           <span class="company-meta">
-            <strong>Aarav Corp. Ltd.</strong>
-            <span>Customer ID: CUST-100245</span>
+            <strong>Loading…</strong>
+            <span>Customer ID: —</span>
           </span>
           <span>▾</span>
         </button>
@@ -73,15 +73,15 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Transactions</div>
-            <div class="stat-value">28</div>
+            <div class="stat-value" id="txnStatCount">—</div>
             <div class="stat-sub">All time</div>
           </div>
-          <div class="stat-icon green">↔</div>
+          <div class="stat-icon green">⇔</div>
         </div>
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Paid</div>
-            <div class="stat-value">₹6,45,600.00</div>
+            <div class="stat-value" id="txnStatTotal">—</div>
             <div class="stat-sub success">All time</div>
           </div>
           <div class="stat-icon green">✓</div>
@@ -89,7 +89,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Total Amount</div>
-            <div class="stat-value">₹6,83,750.00</div>
+            <div class="stat-value" id="txnStatTotalAmt">—</div>
             <div class="stat-sub">All time</div>
           </div>
           <div class="stat-icon blue">👜</div>
@@ -97,7 +97,7 @@
         <div class="stat-card">
           <div>
             <div class="stat-label">Refunds</div>
-            <div class="stat-value">₹25,000.00</div>
+            <div class="stat-value" id="txnStatRefunds">—</div>
             <div class="stat-sub">All time</div>
           </div>
           <div class="stat-icon purple">↻</div>
@@ -120,110 +120,17 @@
         <div>
           <div class="panel">
             <div class="table-scroll">
-              <table class="data-table">
+               <table class="data-table">
                 <thead>
                   <tr>
                     <th>Transaction ID</th>
                     <th>Date</th>
                     <th>Type</th>
-                    <th>Related To</th>
                     <th>Amount</th>
-                    <th>Payment Method</th>
-                    <th>Status</th>
+                    <th>Description</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2025-0528-0001</strong></td>
-                    <td data-label="Date"><div>28 May 2025<br><span class="inv-sub">10:30 AM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0148</span></td>
-                    <td data-label="Amount"><strong>₹28,750.00</strong></td>
-                    <td data-label="Payment Method">UPI</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2025-0516-0008</strong></td>
-                    <td data-label="Date"><div>16 May 2025<br><span class="inv-sub">04:22 PM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0132</span></td>
-                    <td data-label="Amount"><strong>₹20,000.00</strong></td>
-                    <td data-label="Payment Method">Net Banking</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2025-0401-0012</strong></td>
-                    <td data-label="Date"><div>01 Apr 2025<br><span class="inv-sub">11:15 AM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0112</span></td>
-                    <td data-label="Amount"><strong>₹20,000.00</strong></td>
-                    <td data-label="Payment Method">UPI</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2025-0312-0005</strong></td>
-                    <td data-label="Date"><div>12 Mar 2025<br><span class="inv-sub">02:10 PM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0101</span></td>
-                    <td data-label="Amount"><strong>₹15,000.00</strong></td>
-                    <td data-label="Payment Method">Visa •••• 4242</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2025-0211-0003</strong></td>
-                    <td data-label="Date"><div>11 Feb 2025<br><span class="inv-sub">09:40 AM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0087</span></td>
-                    <td data-label="Amount"><strong>₹18,750.00</strong></td>
-                    <td data-label="Payment Method">Mastercard •••• 9987</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2025-0120-0004</strong></td>
-                    <td data-label="Date"><div>20 Jan 2025<br><span class="inv-sub">03:05 PM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-overdue">• Refund</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2025-0070</span></td>
-                    <td data-label="Amount"><strong style="color:var(--danger)">− ₹5,000.00</strong></td>
-                    <td data-label="Payment Method">UPI</td>
-                    <td data-label="Status"><span class="badge-status" style="background:var(--info-soft);color:var(--info)">• Processed</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2024-1210-0009</strong></td>
-                    <td data-label="Date"><div>10 Dec 2024<br><span class="inv-sub">01:08 PM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2024-0056</span></td>
-                    <td data-label="Amount"><strong>₹10,000.00</strong></td>
-                    <td data-label="Payment Method">Net Banking</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2024-1115-0004</strong></td>
-                    <td data-label="Date"><div>15 Nov 2024<br><span class="inv-sub">10:22 AM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-due">• Adjustment</span></td>
-                    <td data-label="Related To">Account Adjustment</td>
-                    <td data-label="Amount"><strong style="color:var(--danger)">− ₹2,500.00</strong></td>
-                    <td data-label="Payment Method">—</td>
-                    <td data-label="Status"><span class="badge-status" style="background:var(--bg-hover);color:var(--muted)">• Completed</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2024-1012-0002</strong></td>
-                    <td data-label="Date"><div>12 Oct 2024<br><span class="inv-sub">05:30 PM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2024-0041</span></td>
-                    <td data-label="Amount"><strong>₹15,000.00</strong></td>
-                    <td data-label="Payment Method">UPI</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                  <tr>
-                    <td data-label="Transaction ID"><strong>TXN-2024-0910-0001</strong></td>
-                    <td data-label="Date"><div>10 Sep 2024<br><span class="inv-sub">11:45 AM IST</span></div></td>
-                    <td data-label="Type"><span class="badge-status badge-paid">• Payment</span></td>
-                    <td data-label="Related To"><span style="color:var(--primary);font-weight:600">INV-2024-0030</span></td>
-                    <td data-label="Amount"><strong>₹12,500.00</strong></td>
-                    <td data-label="Payment Method">Net Banking</td>
-                    <td data-label="Status"><span class="badge-status badge-paid">• Success</span></td>
-                  </tr>
-                </tbody>
+                <tbody id="txnTbody"></tbody>
               </table>
             </div>
             <div class="table-footer">
@@ -293,6 +200,8 @@
     </footer>
   </div>
 
-  <script src="../shared/dashboard-shared.js"></script>
+  <script src="../shared/api.js"></script>
+  <script src="../shared/portal-utils.js"></script>
+  <script src="transactions.js"></script>
 </body>
 </html>
