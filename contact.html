@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="contact.css">
   <link rel="icon" href="assets/logo.png" type="image/x-icon" />
 </head>
+
 <body>
   <div class="bg-grid"></div>
   <div class="bg-glow bg-glow-1"></div>
@@ -70,7 +72,9 @@
             <div class="info-icon">✉️</div>
             <div>
               <div class="info-label">Email Address</div>
-              <a href="mailto:quickwrks@outlook.com"><div class="info-value">hello@quickwrks.com</div></a>
+              <a href="mailto:quickwrks@outlook.com">
+                <div class="info-value">hello@quickwrks.com</div>
+              </a>
             </div>
           </div>
           <div class="info-item">
@@ -83,7 +87,7 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwlebjld" method="POST">
         <div class="form-group">
           <label>Full Name <span>*</span></label>
           <input type="text" placeholder="Enter your full name" required>
@@ -140,7 +144,9 @@
         <div class="form-group privacy-group">
           <label class="privacy-label">
             <input type="checkbox" id="privacyCheck" required>
-            <span class="privacy-text">I agree to the <a href="legal/Customer Contact Form Privacy Policy.pdf">Privacy Policy</a> and consent to QuickWrks processing my data to respond to this enquiry. <span class="req">*</span></span>
+            <span class="privacy-text">I agree to the <a href="legal/Customer Contact Form Privacy Policy.pdf">Privacy
+                Policy</a> and consent to QuickWrks processing my data to respond to this enquiry. <span
+                class="req">*</span></span>
           </label>
         </div>
         <button type="submit" class="btn-send">Send Message</button>
@@ -205,4 +211,5 @@
 
   <script src="contact.js"></script>
 </body>
+
 </html>
