@@ -162,24 +162,31 @@
     });
 
 
-    // Contact form
     const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const privacy = document.getElementById('privacyCheck');
-        const privacyGroup = privacy.closest('.privacy-group');
-        if (!privacy.checked) {
-          privacyGroup.classList.add('error');
-          privacy.focus();
-          return;
-        }
-        privacyGroup.classList.remove('error');
-        alert('Thank you! Your message has been sent. Our team will contact you shortly.');
-        contactForm.reset();
-      });
 
-      document.getElementById('privacyCheck').addEventListener('change', function() {
-        this.closest('.privacy-group').classList.remove('error');
-      });
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+
+    const privacy = document.getElementById('privacyCheck');
+    const privacyGroup = privacy.closest('.privacy-group');
+
+    if (!privacy.checked) {
+      e.preventDefault();
+
+      privacyGroup.classList.add('error');
+      privacy.focus();
+
+      return;
     }
+
+    privacyGroup.classList.remove('error');
+
+    // IMPORTANT:
+    // Do NOT use e.preventDefault() here.
+    // Let the form submit normally to Formspree.
+  });
+
+  document.getElementById('privacyCheck').addEventListener('change', function () {
+    this.closest('.privacy-group').classList.remove('error');
+  });
+}
