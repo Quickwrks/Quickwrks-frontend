@@ -72,77 +72,198 @@
 
 
 
+    <!-- ===================================================
+         CONTACT SECTION
+         =================================================== -->
 
-
-
-    <!-- CONTACT PAGE -->
     <section class="contact-page">
+
+
+      <!-- =================================================
+           LEFT SIDE
+           ================================================= -->
+
       <div class="contact-left">
-        <h1>Let's Talk<br>About Your Business</h1>
-        <p class="contact-intro">Tell us about your requirements and our team will get back to you shortly.</p>
+
+        <h1>
+          Let's Talk<br>
+          About Your Business
+        </h1>
+
+
+        <p class="contact-intro">
+
+          Tell us about your requirements and our team
+          will get back to you shortly.
+
+        </p>
+
 
         <div class="contact-info">
+
+
+          <!-- EMAIL -->
+
           <div class="info-item">
-            <!-- <div class="info-icon">📞</div> -->
-            <div>
-              <!-- <div class="info-label">Phone Number</div>
-              <div class="info-value">+91 98765 43210</div> -->
+
+            <div class="info-icon">
+              ✉️
             </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">✉️</div>
+
             <div>
-              <div class="info-label">Email Address</div>
-              <a href="mailto:quickwrks@outlook.com">
-                <div class="info-value">hello@quickwrks.com</div>
+
+              <div class="info-label">
+                Email Address
+              </div>
+
+              <a href="mailto:hello@quickwrks.com">
+
+                <div class="info-value">
+                  hello@quickwrks.com
+                </div>
+
               </a>
+
             </div>
+
           </div>
+
+
+          <!-- BUSINESS HOURS -->
+
           <div class="info-item">
-            <div class="info-icon">🕐</div>
-            <div>
-              <div class="info-label">Business Hours</div>
-              <div class="info-value">Mon – Sat: 10:00 AM – 7:00 PM</div>
+
+            <div class="info-icon">
+              🕐
             </div>
+
+            <div>
+
+              <div class="info-label">
+                Business Hours
+              </div>
+
+              <div class="info-value">
+                Mon – Sat: 10:00 AM – 7:00 PM
+              </div>
+
+            </div>
+
           </div>
+
+
         </div>
+
       </div>
 
-      "<form class="contact-form" id="contactForm" action="https://formspree.io/f/mwlebjld" method="POST">
+
+      <!-- =================================================
+           RIGHT SIDE - FORM
+           ================================================= -->
+
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwlebjld" method="POST">
+
+
+        <!-- FORM SUBJECT -->
 
         <input type="hidden" name="_subject" value="New Contact Enquiry - QuickWrks">
 
-        <div class="form-group">
-          <label>Full Name <span>*</span></label>
-          <input type="text" name="full_name" placeholder="Enter your full name" required>
-        </div>
 
-        <div class="form-group">
-          <label>Business Name <span>*</span></label>
-          <input type="text" name="business_name" placeholder="Enter your business name" required>
-        </div>
-
-        <div class="form-group">
-          <label>Phone Number <span>*</span></label>
-          <input type="tel" name="phone" placeholder="Enter your phone number" required>
-        </div>
-
-        <div class="form-group">
-          <label>Email Address <span>*</span></label>
-          <input type="email" name="email" placeholder="Enter your email address" required>
-        </div>
+        <!-- ===============================================
+             FULL NAME + BUSINESS NAME
+             =============================================== -->
 
         <div class="form-row">
 
-          <div class="form-group">
-            <label>City <span>*</span></label>
-            <input type="text" name="city" placeholder="Enter your city" required>
-          </div>
 
           <div class="form-group">
-            <label>State <span>*</span></label>
+
+            <label>
+              Full Name <span>*</span>
+            </label>
+
+            <input type="text" name="full_name" placeholder="Enter your full name" autocomplete="name" required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Business Name <span>*</span>
+            </label>
+
+            <input type="text" name="business_name" placeholder="Enter your business name" autocomplete="organization"
+              required>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ===============================================
+             PHONE + EMAIL
+             =============================================== -->
+
+        <div class="form-row">
+
+
+          <div class="form-group">
+
+            <label>
+              Phone Number <span>*</span>
+            </label>
+
+            <input type="tel" name="phone" placeholder="Enter your phone number" autocomplete="tel" required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Email Address <span>*</span>
+            </label>
+
+            <input type="email" name="email" placeholder="Enter your email address" autocomplete="email" required>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ===============================================
+             CITY + STATE
+             =============================================== -->
+
+        <div class="form-row">
+
+
+          <div class="form-group">
+
+            <label>
+              City <span>*</span>
+            </label>
+
+            <input type="text" name="city" placeholder="Enter your city" autocomplete="address-level2" required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              State <span>*</span>
+            </label>
+
             <select name="state" required>
-              <option value="" disabled selected>Enter your state</option>
+
+              <option value="" disabled selected>
+                Enter your state
+              </option>
+
               <option>Delhi</option>
               <option>Maharashtra</option>
               <option>Karnataka</option>
@@ -150,48 +271,133 @@
               <option>Gujarat</option>
               <option>Uttar Pradesh</option>
               <option>West Bengal</option>
+              <option>Rajasthan</option>
+              <option>Madhya Pradesh</option>
+              <option>Punjab</option>
+              <option>Haryana</option>
+              <option>Telangana</option>
+              <option>Kerala</option>
+              <option>Andhra Pradesh</option>
+              <option>Bihar</option>
+              <option>Odisha</option>
+              <option>Jharkhand</option>
+              <option>Assam</option>
               <option>Other</option>
+
             </select>
+
           </div>
 
+
         </div>
 
+
+        <!-- ===============================================
+             SERVICE
+             =============================================== -->
+
         <div class="form-group">
-          <label>Interested Service <span>*</span></label>
+
+          <label>
+            Interested Service <span>*</span>
+          </label>
+
           <select name="service" required>
-            <option value="" disabled selected>Select a service</option>
+
+            <option value="" disabled selected>
+              Select a service
+            </option>
+
             <option>QuickPOS</option>
+
             <option>QuickERP</option>
+
             <option>QuickCRM</option>
+
             <option>Inventory</option>
+
             <option>QuickHR</option>
+
             <option>QuickAnalytics</option>
+
             <option>Full Platform</option>
+
           </select>
+
         </div>
 
+
+        <!-- ===============================================
+             MESSAGE
+             =============================================== -->
+
         <div class="form-group">
-          <label>Tell us about your business <span>*</span></label>
-          <textarea name="message" rows="4" placeholder="Write your message here..." required></textarea>
+
+          <label>
+            Tell us about your business <span>*</span>
+          </label>
+
+          <textarea name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
         </div>
+
+
+        <!-- ===============================================
+             PRIVACY
+             =============================================== -->
 
         <div class="form-group privacy-group">
+
           <label class="privacy-label">
+
+
             <input type="checkbox" id="privacyCheck" name="privacy_consent" value="Agreed" required>
 
+
             <span class="privacy-text">
+
               I agree to the
-              <a href="legal/customer contact form privacy policy.pdf">Privacy Policy</a>
-              and consent to QuickWrks processing my data to respond to this enquiry.
+
+              <a href="legal/customer contact form privacy policy.pdf" target="_blank">
+
+                Privacy Policy
+
+              </a>
+
+              and consent to QuickWrks processing
+              my data to respond to this enquiry.
+
               <span class="req">*</span>
+
             </span>
+
+
           </label>
+
         </div>
 
-        <button type="submit" class="btn-send">Send Message</button>
+
+        <!-- ===============================================
+             SEND
+             =============================================== -->
+
+        <button type="submit" class="btn-send">
+
+          Send Message
+
+        </button>
+
 
       </form>
+
     </section>
+
+
+
+
+
+
+
 
     <!-- footer start -->
     <footer>
