@@ -2,13 +2,18 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- SEO -->
   <meta name="description"
     content="Get in touch with QuickWrks to discuss business software, digital solutions and technology tailored to your organization's needs.">
 
   <meta name="robots" content="index, follow">
+
   <link rel="canonical" href="https://quickwrks.com/contact">
 
+  <!-- Open Graph -->
   <meta property="og:title" content="Contact QuickWrks – Let's Build Your Solution">
   <meta property="og:description"
     content="Have a business technology requirement? Contact QuickWrks to discuss software and digital solutions tailored to your needs.">
@@ -16,12 +21,13 @@
   <meta property="og:url" content="https://quickwrks.com/contact">
   <meta property="og:type" content="website">
 
+  <!-- X / Twitter -->
   <meta name="twitter:card" content="summary_large_image">
 
-  <title>Contact – QuickWrks</title>
+  <title>Contact QuickWrks – Business Software & Digital Solutions</title>
+
   <link rel="stylesheet" href="contact.css">
-  <link rel="icon" href="assets/logo.png" type="image/x-icon" />
-  <meta name="description" content="Get in touch with QuickWrks for all your business needs." />
+  <link rel="icon" href="assets/logo.png" type="image/png">
 </head>
 
 <body>
@@ -102,7 +108,9 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwlebjld" method="POST">
+      "<form class="contact-form" id="contactForm" action="https://formspree.io/f/mwlebjld" method="POST">
+
+        <input type="hidden" name="_subject" value="New Contact Enquiry - QuickWrks">
 
         <div class="form-group">
           <label>Full Name <span>*</span></label>
@@ -169,7 +177,7 @@
 
         <div class="form-group privacy-group">
           <label class="privacy-label">
-            <input type="checkbox" id="privacyCheck" required>
+            <input type="checkbox" id="privacyCheck" name="privacy_consent" value="Agreed" required>
 
             <span class="privacy-text">
               I agree to the
