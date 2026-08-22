@@ -270,6 +270,9 @@
       display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem;
     }
     .footer-brand p { font-size: 0.9rem; color: var(--muted); margin: 0.75rem 0 1.25rem; max-width: 240px; }
+    @media (max-width: 768px) {
+      .footer-brand .logo { justify-content: center; }
+    }
     .socials { display: flex; gap: 0.6rem; }
     .socials a {
       width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border);
