@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Reviews – QuickWrks</title>
+  <meta name="description" content="Read customer reviews and feedback about QuickWrks business software and digital solutions.">
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://quickwrks.com/reviews.html">
+
+<meta property="og:title" content="Customer Reviews | QuickWrks">
+<meta property="og:description" content="See what customers say about QuickWrks business software and digital solutions.">
+<meta property="og:image" content="https://quickwrks.com/assets/logo.png">
+<meta property="og:url" content="https://quickwrks.com/reviews.html">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reviews.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="page">
+    <header>
+      <!-- nav start -->
+      <nav class="nav">
+        <a href="index.html" class="logo"><span class="logo-icon">Q</span> QuickWrks</a>
+        <ul class="nav-links">
+          <li><a href="products.html">Products</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html"><button class="btn-login">Log in</button></a>
+          <a href="contact.html"><button class="btn-get-started">Get Started</button></a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+      <a href="products.html">Products</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="about.html">About</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <div class="mobile-actions">
+        <a href="login.html"><button class="btn-login">Log in</button></a>
+        <a href="contact.html"><button class="btn-get-started">Get Started</button></a>
+      </div>
+    </div>
+
+
+
+    <main class="reviews-page">
+      <div class="page-hero">
+        <div class="section-label">Google Reviews</div>
+        <h1>What our customers say</h1>
+        <p>Honest feedback from businesses using QuickWrks — pulled from our Google Business Profile.</p>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-score">
+          <div class="big">4.8</div>
+          <div class="summary-stars" aria-label="4.8 out of 5">★★★★★</div>
+          <div class="summary-count">128 Google reviews</div>
+          <div class="google-badge"><span class="g">G</span> Powered by Google</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-row"><span class="rb-label">5 ★</span><div class="rb-track"><div class="rb-fill" style="width:75%"></div></div><span class="rb-count">96</span></div>
+          <div class="rating-row"><span class="rb-label">4 ★</span><div class="rb-track"><div class="rb-fill" style="width:14%"></div></div><span class="rb-count">18</span></div>
+          <div class="rating-row"><span class="rb-label">3 ★</span><div class="rb-track"><div class="rb-fill" style="width:6%"></div></div><span class="rb-count">8</span></div>
+          <div class="rating-row"><span class="rb-label">2 ★</span><div class="rb-track"><div class="rb-fill" style="width:3%"></div></div><span class="rb-count">4</span></div>
+          <div class="rating-row"><span class="rb-label">1 ★</span><div class="rb-track"><div class="rb-fill" style="width:2%"></div></div><span class="rb-count">2</span></div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab active" data-filter="all">All</button>
+          <button type="button" class="tab" data-filter="5">5 Star</button>
+          <button type="button" class="tab" data-filter="4">4 Star</button>
+          <button type="button" class="tab" data-filter="low">3 &amp; below</button>
+        </div>
+        <div class="toolbar-right">
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="search" id="reviewSearch" placeholder="Search reviews..." aria-label="Search reviews" />
+          </div>
+          <select class="select-sort" id="sortReviews" aria-label="Sort reviews">
+            <option value="newest">Newest first</option>
+            <option value="highest">Highest rated</option>
+            <option value="lowest">Lowest rated</option>
+          </select>
+        </div>
+      </div>
+
+      <!--
+        Frontend page: sample reviews shown for design.
+        Live data can be loaded from Google Places API (Place Details → reviews)
+        or a static JSON endpoint if you later add a thin backend.
+      -->
+      <div class="reviews-grid" id="reviewsList">
+        <article class="review-card" data-rating="5" data-date="2025-05-18">
+          <div class="review-head">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#16a34a,#22c55e)">RK</div>
+            <div>
+              <div class="review-name">Rahul Kapoor</div>
+              <div class="review-stars">★★★★★</div>
+              <div class="review-time">2 weeks ago</div>
+            </div>
+          </div>
+          <p class="review-text">QuickWrks transformed how we handle billing. The portal is clean, invoices are clear, and support responds within a day. Highly recommend for growing teams.</p>
+          <div class="review-footer"><span class="via-google">via Google</span></div>
+        </article>
+
+        <article class="review-card" data-rating="5" data-date="2025-05-10">
+          <div class="review-head">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#2563eb,#60a5fa)">SP</div>
+            <div>
+              <div class="review-name">Sneha Patel</div>
+              <div class="review-stars">★★★★★</div>
+              <div class="review-time">3 weeks ago</div>
+            </div>
+          </div>
+          <p class="review-text">We switched from spreadsheets to QuickWrks for our restaurant chain. GST reports and e-invoice reconciliation alone saved us hours every month.</p>
+          <div class="review-footer"><span class="via-google">via Google</span></div>
+        </article>
+
+        <article class="review-card" data-rating="4" data-date="2025-04-28">
+          <div class="review-head">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#a855f7,#c084fc)">AM</div>
+            <div>
+              <div class="review-name">Amit Mehta</div>
+              <div class="review-stars">★★★★☆</div>
+              <div class="review-time">1 month ago</div>
+            </div>
+          </div>
+          <p class="review-text">Solid product. Dashboard is intuitive and payments are smooth. Would love a mobile app next — the web portal is already very usable on phone though.</p>
+          <div class="review-footer"><span class="via-google">via Google</span></div>
+        </article>
+
+        <article class="review-card" data-rating="5" data-date="2025-04-15">
+          <div class="review-head">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#ea580c,#fb923c)">NJ</div>
+            <div>
+              <div class="review-name">Neha Joshi</div>
+              <div class="review-stars">★★★★★</div>
+              <div class="review-time">1 month ago</div>
+            </div>
+          </div>
+          <p class="review-text">Excellent onboarding. The team walked us through setup and our accountants picked it up in a day. Transaction history is exactly what we needed for audits.</p>
+          <div class="review-footer"><span class="via-google">via Google</span></div>
+        </article>
+
+        <article class="review-card" data-rating="3" data-date="2025-03-22">
+          <div class="review-head">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#64748b,#94a3b8)">VK</div>
+            <div>
+              <div class="review-name">Vikram Khan</div>
+              <div class="review-stars">★★★☆☆</div>
+              <div class="review-time">2 months ago</div>
+            </div>
+          </div>
+          <p class="review-text">Good features overall. Reporting could be faster on large date ranges. Support was helpful when we raised a ticket about export formats.</p>
+          <div class="review-footer"><span class="via-google">via Google</span></div>
+        </article>
+
+        <article class="review-card" data-rating="5" data-date="2025-03-05">
+          <div class="review-head">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#0d9488,#2dd4bf)">PD</div>
+            <div>
+              <div class="review-name">Priya Desai</div>
+              <div class="review-stars">★★★★★</div>
+              <div class="review-time">2 months ago</div>
+            </div>
+          </div>
+          <p class="review-text">Best decision for our multi-location retail setup. Invoices, payments, and product modules in one place. Clear UI and reliable support.</p>
+          <div class="review-footer"><span class="via-google">via Google</span></div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <button type="button" class="page-btn" disabled>‹</button>
+        <button type="button" class="page-btn active">1</button>
+        <button type="button" class="page-btn">2</button>
+        <button type="button" class="page-btn">3</button>
+        <button type="button" class="page-btn">›</button>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Ready to grow with QuickWrks?</h2>
+        <p>Join businesses that trust us for billing, ERP, and everyday operations.</p>
+        <a href="contact.html" class="btn-get-started">Get Started</a>
+        <a href="https://g.page/r/CffgtyjMjyc2EAE/review" class="btn-get-started">Reviews on Google</a>
+      </div>
+    </main>
+
+    <!-- <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><span class="logo-icon">Q</span> QuickWrks</a>
+          <p>Powering businesses. Simplifying growth.</p>
+          <div class="socials">
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="Email">✉</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="products.html">QuickPOS</a></li>
+            <li><a href="products.html">QuickERP</a></li>
+            <li><a href="products.html">QuickCRM</a></li>
+            <li><a href="products.html">QuickInventory</a></li>
+            <li><a href="products.html">QuickHR</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 QuickWrks. All rights reserved.</span>
+        <span><a href="#">Privacy</a><a href="#">Terms</a></span>
+      </div>
+    </footer> -->
+  </div>
+
+  <script src="js/reviews.js"></script>
+</body>
+</html>
