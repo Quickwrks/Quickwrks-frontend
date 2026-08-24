@@ -1,0 +1,3252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Library Management System – QuickWrks</title>
+
+    <meta name="description"
+        content="QuickWrks Library Management System helps libraries simplify book management, members, issue and return operations, reports and everyday library workflows." />
+
+    <meta name="robots" content="index, follow" />
+
+    <style>
+        /* =========================================================
+       RESET
+    ========================================================= */
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --orange: #f97316;
+            --orange-dark: #ea580c;
+            --orange-light: #fff7ed;
+
+            --navy: #0f172a;
+            --navy-2: #1e293b;
+
+            --text: #172033;
+            --text-secondary: #475569;
+            --muted: #64748b;
+
+            --white: #ffffff;
+            --background: #f8fafc;
+            --border: #e2e8f0;
+
+            --green: #16a34a;
+            --green-light: #f0fdf4;
+
+            --shadow-sm:
+                0 5px 18px rgba(15, 23, 42, 0.06);
+
+            --shadow-md:
+                0 15px 40px rgba(15, 23, 42, 0.10);
+
+            --shadow-lg:
+                0 25px 65px rgba(15, 23, 42, 0.14);
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 22px;
+
+            --container: 1200px;
+
+            --font:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--white);
+            color: var(--text);
+
+            line-height: 1.6;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+
+        /* =========================================================
+       HEADER
+    ========================================================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            width: min(var(--container), calc(100% - 40px));
+
+            min-height: 86px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        /* LOGO */
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+
+            flex-shrink: 0;
+        }
+
+        .logo-icon {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(135deg,
+                    var(--orange),
+                    #fb923c);
+
+            color: white;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            box-shadow:
+                0 7px 20px rgba(249, 115, 22, 0.20);
+        }
+
+        .logo-text strong {
+            display: block;
+
+            color: var(--navy);
+
+            font-size: 20px;
+            font-weight: 800;
+
+            line-height: 1.1;
+        }
+
+        .logo-text span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            line-height: 1;
+        }
+
+
+        /* NAVIGATION */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -7px;
+
+            width: 0;
+            height: 2px;
+
+            border-radius: 999px;
+
+            background: var(--orange);
+
+            transition: width 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        /* MOBILE MENU BUTTON */
+
+        .menu-toggle {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: white;
+
+            color: var(--navy);
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* MOBILE MENU */
+
+        .mobile-menu {
+            display: none;
+
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: auto;
+
+            padding-bottom: 18px;
+
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            padding: 12px 10px;
+
+            border-radius: 8px;
+
+            color: var(--text-secondary);
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--orange);
+            background: var(--orange-light);
+        }
+
+
+        /* =========================================================
+       HERO
+    ========================================================= */
+
+        .hero {
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: auto;
+
+            padding: 75px 0 90px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 0.9fr) minmax(0, 1.05fr);
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .hero-left {
+            min-width: 0;
+        }
+
+
+        /* BADGE */
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 9px 15px;
+
+            margin-bottom: 23px;
+
+            border-radius: 999px;
+
+            background: var(--orange-light);
+
+            color: var(--orange);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.03em;
+        }
+
+
+        /* TITLE */
+
+        .hero h1 {
+            max-width: 680px;
+
+            margin-bottom: 20px;
+
+            color: var(--navy);
+
+            font-size:
+                clamp(42px,
+                    4.7vw,
+                    62px);
+
+            font-weight: 850;
+
+            line-height: 1.04;
+
+            letter-spacing: -0.045em;
+        }
+
+        .hero h1 .orange {
+            color: var(--orange);
+        }
+
+
+        /* DESCRIPTION */
+
+        .hero-desc {
+            max-width: 550px;
+
+            margin-bottom: 27px;
+
+            color: var(--muted);
+
+            font-size: 17px;
+
+            line-height: 1.7;
+        }
+
+
+        /* CHECKS */
+
+        .hero-checks {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px 30px;
+
+            max-width: 580px;
+
+            margin-bottom: 30px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .tick {
+            width: 21px;
+            height: 21px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #ffedd5;
+
+            color: var(--orange);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        /* PRIMARY BUTTON */
+
+        .btn-primary {
+            min-height: 49px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 25px;
+
+            border: 0;
+            border-radius: 11px;
+
+            background: var(--orange);
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 22px rgba(249, 115, 22, 0.18);
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-dark);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 28px rgba(249, 115, 22, 0.25);
+        }
+
+
+        /* =========================================================
+       SOFTWARE PREVIEW
+    ========================================================= */
+
+        .hero-visual {
+            position: relative;
+            min-width: 0;
+        }
+
+        .hero-media {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 3 / 2;
+
+            overflow: hidden;
+
+            border-radius: var(--radius-lg);
+
+            background: var(--navy);
+
+            box-shadow: var(--shadow-lg);
+        }
+
+
+        /* IMAGE */
+
+        .hero-img {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-img::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(to bottom,
+                    rgba(15, 23, 42, 0.04),
+                    rgba(15, 23, 42, 0.25));
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
+       KNOW MORE BUTTON
+    ========================================================= */
+
+        .know-more-btn {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            z-index: 10;
+
+            transform: translate(-50%, -50%);
+
+            min-width: 140px;
+
+            padding: 13px 24px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: var(--orange);
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.25);
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .know-more-btn:hover {
+            background: var(--orange-dark);
+
+            transform:
+                translate(-50%, -50%) translateY(-3px);
+
+            box-shadow:
+                0 14px 34px rgba(0, 0, 0, 0.28);
+        }
+
+
+        /* =========================================================
+       VIDEO
+    ========================================================= */
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+
+            display: none;
+
+            width: 100%;
+            height: 100%;
+
+            background: #000;
+        }
+
+        .hero-video video {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            background: #000;
+        }
+
+        .hero-media.video-active .hero-img {
+            display: none;
+        }
+
+        .hero-media.video-active .hero-video {
+            display: block;
+        }
+
+
+        /* =========================================================
+       FLOATING CARD
+    ========================================================= */
+
+        .hero-float-card {
+            position: absolute;
+
+            left: 22px;
+            bottom: 22px;
+
+            z-index: 20;
+
+            width: min(310px, calc(100% - 44px));
+
+            display: flex;
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.98);
+
+            box-shadow:
+                0 15px 35px rgba(15, 23, 42, 0.16);
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .hero-visual.video-playing .hero-float-card {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transform: translateY(10px);
+        }
+
+        .float-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: var(--orange-light);
+
+            font-size: 19px;
+        }
+
+        .float-text strong {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: var(--navy);
+
+            font-size: 14px;
+            font-weight: 750;
+
+            line-height: 1.35;
+        }
+
+        .float-text p {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.45;
+        }
+
+
+        /* =========================================================
+       SOFTWARE TRUST BAR
+    ========================================================= */
+
+        .trust-bar {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+
+            background: var(--background);
+        }
+
+        .trust-inner {
+            width: min(var(--container), calc(100% - 40px));
+
+            min-height: 100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 11px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .trust-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================================
+       FEATURES
+    ========================================================= */
+
+        .features {
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: auto;
+
+            padding: 95px 0;
+
+            text-align: center;
+        }
+
+        .section-label {
+            margin-bottom: 9px;
+
+            color: var(--orange);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.1em;
+
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            margin-bottom: 12px;
+
+            color: var(--navy);
+
+            font-size:
+                clamp(29px,
+                    3.5vw,
+                    41px);
+
+            font-weight: 800;
+
+            line-height: 1.15;
+
+            letter-spacing: -0.035em;
+        }
+
+        .section-description {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            color: var(--muted);
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+        .section-underline {
+            width: 50px;
+            height: 3px;
+
+            margin: 20px auto 40px;
+
+            border-radius: 999px;
+
+            background: var(--orange);
+        }
+
+
+        /* FEATURE GRID */
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 17px;
+
+            text-align: left;
+        }
+
+        .feature-card {
+            position: relative;
+
+            padding: 27px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #fed7aa;
+
+            box-shadow:
+                0 15px 35px rgba(15, 23, 42, 0.09);
+        }
+
+        .feature-number {
+            position: absolute;
+
+            top: 20px;
+            right: 22px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .feature-icon {
+            width: 49px;
+            height: 49px;
+
+            margin-bottom: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: var(--orange-light);
+
+            font-size: 21px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 7px;
+
+            color: var(--navy);
+
+            font-size: 16px;
+            font-weight: 750;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+       DASHBOARD SECTION
+    ========================================================= */
+
+        .dashboard-section {
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: auto;
+
+            padding-bottom: 95px;
+        }
+
+        .dashboard-box {
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 0.9fr) minmax(0, 1.1fr);
+
+            gap: 55px;
+
+            align-items: center;
+
+            padding: 50px;
+
+            border-radius: 23px;
+
+            background:
+                linear-gradient(135deg,
+                    #0f172a,
+                    #1e293b);
+
+            color: white;
+
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dashboard-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dark-label {
+            margin-bottom: 10px;
+
+            color: #fb923c;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.1em;
+
+            text-transform: uppercase;
+        }
+
+        .dashboard-content h2 {
+            margin-bottom: 14px;
+
+            font-size:
+                clamp(29px,
+                    3.3vw,
+                    42px);
+
+            font-weight: 800;
+
+            line-height: 1.15;
+
+            letter-spacing: -0.035em;
+        }
+
+        .dashboard-content p {
+            max-width: 500px;
+
+            margin-bottom: 25px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .dashboard-list {
+            list-style: none;
+        }
+
+        .dashboard-list li {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 10px;
+
+            color: #e2e8f0;
+
+            font-size: 13px;
+        }
+
+        .dashboard-list .tick {
+            background: rgba(249, 115, 22, 0.16);
+
+            color: #fb923c;
+        }
+
+
+        /* FAKE SOFTWARE SCREEN */
+
+        .software-screen {
+            position: relative;
+            z-index: 2;
+
+            overflow: hidden;
+
+            border-radius: 14px;
+
+            background: #f8fafc;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .software-topbar {
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 0 14px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: white;
+        }
+
+        .window-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #cbd5e1;
+        }
+
+        .software-body {
+            padding: 20px;
+
+            color: var(--navy);
+        }
+
+        .software-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 17px;
+        }
+
+        .software-heading strong {
+            font-size: 14px;
+        }
+
+        .software-heading span {
+            padding: 6px 10px;
+
+            border-radius: 7px;
+
+            background: var(--orange-light);
+
+            color: var(--orange);
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .software-cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 9px;
+
+            margin-bottom: 17px;
+        }
+
+        .mini-card {
+            padding: 12px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            background: white;
+        }
+
+        .mini-card span {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+        .mini-card strong {
+            color: var(--navy);
+
+            font-size: 16px;
+        }
+
+        .software-table {
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            background: white;
+        }
+
+        .table-row {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr 1fr 0.7fr;
+
+            padding: 9px 11px;
+
+            border-bottom: 1px solid var(--border);
+
+            font-size: 9px;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-row.header {
+            color: var(--muted);
+
+            background: #f8fafc;
+
+            font-weight: 700;
+        }
+
+        .status {
+            color: var(--green);
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+       BENEFITS
+    ========================================================= */
+
+        .benefits {
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: auto;
+
+            padding-bottom: 95px;
+        }
+
+        .benefit-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+        }
+
+        .benefit-card {
+            padding: 23px 18px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            background: var(--background);
+
+            text-align: center;
+        }
+
+        .benefit-icon {
+            width: 45px;
+            height: 45px;
+
+            margin: 0 auto 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            font-size: 18px;
+        }
+
+        .benefit-card h3 {
+            margin-bottom: 5px;
+
+            color: var(--navy);
+
+            font-size: 14px;
+        }
+
+        .benefit-card p {
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+       CTA
+    ========================================================= */
+
+        .cta-banner {
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: 0 auto 95px;
+        }
+
+        .cta-inner {
+            position: relative;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.15fr) minmax(0, 0.85fr);
+
+            gap: 50px;
+
+            align-items: center;
+
+            padding: 55px;
+
+            border-radius: 23px;
+
+            background:
+                linear-gradient(135deg,
+                    var(--orange),
+                    #fb923c);
+
+            color: white;
+        }
+
+        .cta-content h2 {
+            max-width: 600px;
+
+            margin-bottom: 13px;
+
+            font-size:
+                clamp(29px,
+                    3.5vw,
+                    43px);
+
+            font-weight: 820;
+
+            line-height: 1.12;
+
+            letter-spacing: -0.035em;
+        }
+
+        .cta-content p {
+            max-width: 560px;
+
+            margin-bottom: 25px;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            opacity: 0.95;
+        }
+
+        .cta-actions {
+            display: flex;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 17px;
+        }
+
+        .btn-white {
+            min-height: 48px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 23px;
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: var(--orange);
+
+            font-size: 14px;
+            font-weight: 750;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.17);
+        }
+
+        .cta-note {
+            font-size: 13px;
+
+            font-style: italic;
+
+            opacity: 0.9;
+        }
+
+
+        /* CTA VISUAL */
+
+        .cta-visual {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+        .cta-icon-box {
+            width: 190px;
+            height: 190px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 35px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+
+            font-size: 88px;
+
+            transform: rotate(4deg);
+        }
+
+
+        /* =========================================================
+       WHY QUICKWRKS
+    ========================================================= */
+
+        .bottom-section {
+            width: min(var(--container), calc(100% - 40px));
+
+            margin: auto;
+
+            padding-bottom: 95px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.3fr) minmax(300px, 0.8fr);
+
+            gap: 50px;
+
+            align-items: start;
+        }
+
+        .why-label {
+            margin-bottom: 8px;
+
+            color: var(--orange);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+        }
+
+        .why-title {
+            margin-bottom: 10px;
+
+            color: var(--navy);
+
+            font-size:
+                clamp(29px,
+                    3vw,
+                    39px);
+
+            font-weight: 800;
+
+            line-height: 1.15;
+
+            letter-spacing: -0.03em;
+        }
+
+        .why-desc {
+            max-width: 550px;
+
+            margin-bottom: 30px;
+
+            color: var(--muted);
+
+            font-size: 15px;
+
+            line-height: 1.65;
+        }
+
+        .stats-row {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 10px;
+        }
+
+        .stat-item {
+            padding: 14px 5px;
+
+            text-align: center;
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+
+            margin: 0 auto 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--orange-light);
+
+            font-size: 18px;
+        }
+
+        .stat-value {
+            margin-bottom: 2px;
+
+            color: var(--navy);
+
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        /* CONNECT CARD */
+
+        .connect-card {
+            padding: 28px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .connect-card h3 {
+            margin-bottom: 8px;
+
+            color: var(--navy);
+
+            font-size: 19px;
+            font-weight: 750;
+        }
+
+        .connect-card>p {
+            margin-bottom: 19px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .connect-list {
+            list-style: none;
+
+            margin-bottom: 22px;
+        }
+
+        .connect-list li {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 10px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .connect-list .tick {
+            width: 19px;
+            height: 19px;
+
+            font-size: 10px;
+        }
+
+        .connect-card .btn-primary {
+            width: 100%;
+        }
+
+
+        /* =========================================================
+       FOOTER
+    ========================================================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+
+            background: #fafafa;
+        }
+
+        .footer-inner {
+            width: min(var(--container), calc(100% - 40px));
+
+            min-height: 100px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .footer-brand .logo-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+        }
+
+        .footer-brand strong {
+            display: block;
+
+            color: var(--navy);
+
+            font-size: 15px;
+        }
+
+        .footer-brand div span {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+
+            gap: 25px;
+
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+
+        /* =========================================================
+       TABLET
+    ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .hero {
+                gap: 42px;
+            }
+
+            .hero h1 {
+                font-size: 49px;
+            }
+
+            .feature-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .dashboard-box {
+                gap: 35px;
+
+                padding: 40px;
+            }
+
+        }
+
+
+        /* =========================================================
+       TABLET / MOBILE NAV
+    ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .nav {
+                min-height: 75px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                gap: 45px;
+
+                padding-top: 50px;
+            }
+
+            .hero-left {
+                text-align: center;
+            }
+
+            .hero h1 {
+                max-width: 700px;
+
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-checks {
+                margin-left: auto;
+                margin-right: auto;
+
+                text-align: left;
+            }
+
+            .hero-btns {
+                display: flex;
+                justify-content: center;
+            }
+
+            .trust-inner {
+                grid-template-columns: 1fr;
+
+                padding: 20px 0;
+            }
+
+            .dashboard-box {
+                grid-template-columns: 1fr;
+
+                text-align: center;
+            }
+
+            .dashboard-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .dashboard-list {
+                display: inline-block;
+
+                text-align: left;
+            }
+
+            .cta-inner {
+                grid-template-columns: 1fr;
+
+                text-align: center;
+            }
+
+            .cta-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-actions {
+                justify-content: center;
+            }
+
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+
+            .why-block {
+                text-align: center;
+            }
+
+            .why-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        }
+
+
+        /* =========================================================
+       MOBILE
+    ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .nav,
+            .mobile-menu,
+            .hero,
+            .features,
+            .dashboard-section,
+            .benefits,
+            .cta-banner,
+            .bottom-section,
+            .footer-inner,
+            .trust-inner {
+                width: min(var(--container),
+                        calc(100% - 28px));
+            }
+
+            .hero {
+                padding-top: 35px;
+                padding-bottom: 65px;
+            }
+
+            .hero-badge {
+                font-size: 9px;
+
+                padding: 8px 11px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-desc {
+                font-size: 15px;
+            }
+
+            .hero-checks {
+                grid-template-columns: 1fr;
+
+                max-width: 310px;
+
+                gap: 10px;
+            }
+
+            .hero-media {
+                aspect-ratio: 1 / 0.86;
+
+                border-radius: 18px;
+            }
+
+            .hero-float-card {
+                left: 15px;
+                bottom: 15px;
+
+                width: calc(100% - 30px);
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                padding: 70px 0;
+            }
+
+            .dashboard-section {
+                padding-bottom: 70px;
+            }
+
+            .dashboard-box {
+                padding: 30px 20px;
+
+                border-radius: 18px;
+            }
+
+            .software-body {
+                padding: 13px;
+            }
+
+            .software-cards {
+                gap: 5px;
+            }
+
+            .mini-card {
+                padding: 8px;
+            }
+
+            .mini-card strong {
+                font-size: 13px;
+            }
+
+            .table-row {
+                padding: 7px;
+
+                font-size: 7px;
+            }
+
+            .benefits {
+                padding-bottom: 70px;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cta-banner {
+                margin-bottom: 70px;
+            }
+
+            .cta-inner {
+                padding: 35px 22px;
+
+                border-radius: 18px;
+            }
+
+            .cta-icon-box {
+                width: 140px;
+                height: 140px;
+
+                font-size: 65px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-inner {
+                padding: 25px 0;
+
+                flex-direction: column;
+
+                justify-content: center;
+
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px 20px;
+            }
+
+        }
+
+
+        /* =========================================================
+       SMALL MOBILE
+    ========================================================= */
+
+        @media (max-width: 400px) {
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero-media {
+                aspect-ratio: 1 / 0.9;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .know-more-btn {
+                min-width: 130px;
+
+                padding: 12px 20px;
+
+                font-size: 14px;
+            }
+
+        }
+
+
+        /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+    <header>
+
+        <nav class="nav">
+
+            <a href="index.html" class="logo" aria-label="QuickWrks Home">
+
+                <span class="logo-icon">Q</span>
+
+                <span class="logo-text">
+                    <strong>QuickWrks</strong>
+                    <span>Smart Solutions. Real Impact.</span>
+                </span>
+
+            </a>
+
+
+            <ul class="nav-links">
+
+                <!-- <li>
+          <a href="#features">Features</a>
+        </li>
+
+        <li>
+          <a href="#dashboard">System</a>
+        </li>
+
+        <li>
+          <a href="#benefits">Benefits</a>
+        </li>
+
+        <li>
+          <a href="#why">About Us</a>
+        </li> -->
+
+            </ul>
+
+
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+                ☰
+            </button>
+
+        </nav>
+
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <!-- <a href="#features">Features</a>
+      <a href="#dashboard">System</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#why">About Us</a> -->
+
+        </div>
+
+    </header>
+
+
+    <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+    <main>
+
+
+        <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+        <section class="hero">
+
+
+            <div class="hero-left">
+
+
+                <div class="hero-badge">
+                    📚 LIBRARY MANAGEMENT SYSTEM – DEVELOPED BY QUICKWRKS
+                </div>
+
+
+                <h1>
+                    Smarter Library
+                    <br>
+                    Management with
+                    <span class="orange">QuickWrks</span>
+                </h1>
+
+
+                <p class="hero-desc">
+                    A powerful and easy-to-manage Library Management System
+                    designed to simplify everyday library operations,
+                    organize resources and make management more efficient.
+                </p>
+
+
+                <div class="hero-checks">
+
+                    <!-- EDIT THESE FEATURES LATER -->
+
+                    <div class="check-item">
+                        <span class="tick">✓</span>
+                        Easy Book Management
+                    </div>
+
+                    <div class="check-item">
+                        <span class="tick">✓</span>
+                        Member Management
+                    </div>
+
+                    <div class="check-item">
+                        <span class="tick">✓</span>
+                        Issue & Return Management
+                    </div>
+
+                    <div class="check-item">
+                        <span class="tick">✓</span>
+                        Fast Search
+                    </div>
+
+                    <div class="check-item">
+                        <span class="tick">✓</span>
+                        Reports & Records
+                    </div>
+
+                    <div class="check-item">
+                        <span class="tick">✓</span>
+                        Simple to Manage
+                    </div>
+
+                </div>
+
+
+                <div class="hero-btns">
+
+                    <a href="contact.html" class="btn-primary">
+                        Connect to QuickWrks →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ===================================================
+           IMAGE / VIDEO
+      ==================================================== -->
+
+            <div class="hero-visual" id="heroVisual">
+
+                <div class="hero-media" id="heroMedia">
+
+
+                    <!-- ORIGINAL IMAGE -->
+
+                    <div class="hero-img">
+
+                        <!--
+              Replace this image later with a screenshot
+              of your actual Library Management System.
+            -->
+
+                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200&h=800&fit=crop&q=85"
+                            alt="Modern library" loading="eager">
+
+
+                        <button class="know-more-btn" id="knowMoreBtn" type="button"
+                            aria-label="Play Library Management System video">
+                            Know More
+                        </button>
+
+                    </div>
+
+
+                    <!-- VIDEO -->
+
+                    <div class="hero-video" id="heroVideo">
+
+                        <video id="libraryVideo" controls playsinline preload="metadata"
+                            aria-label="QuickWrks Library Management System demonstration video">
+
+                            <!--
+                PUT YOUR VIDEO FILE HERE.
+
+                Example:
+
+                library-management-system.mp4
+
+                Keep the video in the same folder
+                as this HTML file.
+              -->
+
+                            <source src="library-management-system.mp4" type="video/mp4">
+
+                            Your browser does not support HTML5 video.
+
+                        </video>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- FLOATING CARD -->
+
+                <div class="hero-float-card" id="heroFloatCard">
+
+                    <div class="float-icon">
+                        📚
+                    </div>
+
+                    <div class="float-text">
+
+                        <strong>
+                            Built with ❤️ by QuickWrks
+                        </strong>
+
+                        <p>
+                            Technology designed to make library
+                            management simpler and more efficient.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         TRUST BAR
+    ====================================================== -->
+
+        <section class="trust-bar">
+
+            <div class="trust-inner">
+
+                <div class="trust-item">
+
+                    <span class="trust-icon">
+                        ⚡
+                    </span>
+
+                    Fast & Efficient
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <span class="trust-icon">
+                        🔒
+                    </span>
+
+                    Secure & Reliable
+
+                </div>
+
+
+                <div class="trust-item">
+
+                    <span class="trust-icon">
+                        📱
+                    </span>
+
+                    Easy to Use
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+        <section class="features" id="features">
+
+            <div class="section-label">
+                Powerful Library Management
+            </div>
+
+
+            <h2 class="section-title">
+                Everything You Need to Manage<br>
+                Your Library Better
+            </h2>
+
+
+            <p class="section-description">
+                Manage everyday library operations from one organized
+                and easy-to-use system.
+            </p>
+
+
+            <div class="section-underline"></div>
+
+
+            <div class="feature-grid">
+
+
+                <!-- FEATURE 01 -->
+
+                <div class="feature-card">
+
+                    <span class="feature-number">
+                        01
+                    </span>
+
+                    <div class="feature-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Book Management
+                    </h3>
+
+                    <p>
+                        Organize your library collection and keep
+                        important book information easy to access.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 02 -->
+
+                <div class="feature-card">
+
+                    <span class="feature-number">
+                        02
+                    </span>
+
+                    <div class="feature-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        Member Management
+                    </h3>
+
+                    <p>
+                        Manage member information and maintain
+                        organized records in one place.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 03 -->
+
+                <div class="feature-card">
+
+                    <span class="feature-number">
+                        03
+                    </span>
+
+                    <div class="feature-icon">
+                        🔄
+                    </div>
+
+                    <h3>
+                        Issue & Return
+                    </h3>
+
+                    <p>
+                        Keep track of books issued and returned
+                        with a streamlined workflow.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 04 -->
+
+                <div class="feature-card">
+
+                    <span class="feature-number">
+                        04
+                    </span>
+
+                    <div class="feature-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Smart Search
+                    </h3>
+
+                    <p>
+                        Find books, members and records quickly
+                        without unnecessary manual searching.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 05 -->
+
+                <div class="feature-card">
+
+                    <span class="feature-number">
+                        05
+                    </span>
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        Reports & Records
+                    </h3>
+
+                    <p>
+                        Keep useful information organized and
+                        make daily reporting easier.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 06 -->
+
+                <div class="feature-card">
+
+                    <span class="feature-number">
+                        06
+                    </span>
+
+                    <div class="feature-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Easy Management
+                    </h3>
+
+                    <p>
+                        A simple interface designed to make
+                        everyday library management easier.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         SYSTEM PREVIEW
+    ====================================================== -->
+
+        <section class="dashboard-section" id="dashboard">
+
+            <div class="dashboard-box">
+
+
+                <div class="dashboard-content">
+
+                    <div class="dark-label">
+                        One System. Better Control.
+                    </div>
+
+
+                    <h2>
+                        Manage Your Library
+                        From One Place
+                    </h2>
+
+
+                    <p>
+                        Bring important library operations together
+                        in one organized management system designed
+                        for faster and more efficient workflows.
+                    </p>
+
+
+                    <ul class="dashboard-list">
+
+                        <li>
+                            <span class="tick">✓</span>
+                            Centralized library information
+                        </li>
+
+                        <li>
+                            <span class="tick">✓</span>
+                            Simplified daily operations
+                        </li>
+
+                        <li>
+                            <span class="tick">✓</span>
+                            Organized records
+                        </li>
+
+                        <li>
+                            <span class="tick">✓</span>
+                            Easy access to important information
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- SOFTWARE MOCKUP -->
+
+                <div class="software-screen">
+
+                    <div class="software-topbar">
+
+                        <span class="window-dot"></span>
+                        <span class="window-dot"></span>
+                        <span class="window-dot"></span>
+
+                    </div>
+
+
+                    <div class="software-body">
+
+
+                        <div class="software-heading">
+
+                            <strong>
+                                Library Dashboard
+                            </strong>
+
+                            <span>
+                                QuickWrks LMS
+                            </span>
+
+                        </div>
+
+
+                        <div class="software-cards">
+
+                            <div class="mini-card">
+
+                                <span>
+                                    Total Books
+                                </span>
+
+                                <strong>
+                                    2,450
+                                </strong>
+
+                            </div>
+
+
+                            <div class="mini-card">
+
+                                <span>
+                                    Members
+                                </span>
+
+                                <strong>
+                                    680
+                                </strong>
+
+                            </div>
+
+
+                            <div class="mini-card">
+
+                                <span>
+                                    Issued
+                                </span>
+
+                                <strong>
+                                    126
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="software-table">
+
+                            <div class="table-row header">
+
+                                <span>
+                                    Book
+                                </span>
+
+                                <span>
+                                    Member
+                                </span>
+
+                                <span>
+                                    Status
+                                </span>
+
+                            </div>
+
+
+                            <div class="table-row">
+
+                                <span>
+                                    Book Record 01
+                                </span>
+
+                                <span>
+                                    Member 001
+                                </span>
+
+                                <span class="status">
+                                    Active
+                                </span>
+
+                            </div>
+
+
+                            <div class="table-row">
+
+                                <span>
+                                    Book Record 02
+                                </span>
+
+                                <span>
+                                    Member 002
+                                </span>
+
+                                <span class="status">
+                                    Active
+                                </span>
+
+                            </div>
+
+
+                            <div class="table-row">
+
+                                <span>
+                                    Book Record 03
+                                </span>
+
+                                <span>
+                                    Member 003
+                                </span>
+
+                                <span class="status">
+                                    Active
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         BENEFITS
+    ====================================================== -->
+
+        <section class="benefits" id="benefits">
+
+            <div class="section-label">
+                Why Use a Library Management System?
+            </div>
+
+
+            <h2 class="section-title">
+                Built to Make Library Operations Easier
+            </h2>
+
+
+            <div class="section-underline"></div>
+
+
+            <div class="benefit-grid">
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        ⏱️
+                    </div>
+
+                    <h3>
+                        Save Time
+                    </h3>
+
+                    <p>
+                        Reduce repetitive manual work.
+                    </p>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        Stay Organized
+                    </h3>
+
+                    <p>
+                        Keep important records structured.
+                    </p>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        📈
+                    </div>
+
+                    <h3>
+                        Improve Efficiency
+                    </h3>
+
+                    <p>
+                        Make daily workflows simpler.
+                    </p>
+
+                </div>
+
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        💻
+                    </div>
+
+                    <h3>
+                        Go Digital
+                    </h3>
+
+                    <p>
+                        Move library management into one system.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+        <section class="cta-banner">
+
+            <div class="cta-inner">
+
+
+                <div class="cta-content">
+
+                    <h2>
+                        Ready to Modernize Your Library?
+                    </h2>
+
+
+                    <p>
+                        Let QuickWrks help you simplify your library
+                        operations with a powerful and practical
+                        Library Management System.
+                    </p>
+
+
+                    <div class="cta-actions">
+
+                        <a href="contact.html" class="btn-white">
+                            Connect to QuickWrks →
+                        </a>
+
+
+                        <span class="cta-note">
+                            Let's build something better together!
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cta-visual">
+
+                    <div class="cta-icon-box">
+                        📚
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+         WHY QUICKWRKS
+    ====================================================== -->
+
+        <section class="bottom-section" id="why">
+
+
+            <div class="why-block">
+
+                <div class="why-label">
+                    Why Choose QuickWrks?
+                </div>
+
+
+                <h2 class="why-title">
+                    Your Growth, Our Mission
+                </h2>
+
+
+                <p class="why-desc">
+                    We combine technology, creativity and practical
+                    business understanding to create digital solutions
+                    that solve real operational problems.
+                </p>
+
+
+                <div class="stats-row">
+
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            👥
+                        </div>
+
+                        <div class="stat-value">
+                            1000+
+                        </div>
+
+                        <div class="stat-label">
+                            Happy Clients
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            📁
+                        </div>
+
+                        <div class="stat-value">
+                            2500+
+                        </div>
+
+                        <div class="stat-label">
+                            Projects Delivered
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            🏅
+                        </div>
+
+                        <div class="stat-value">
+                            5+
+                        </div>
+
+                        <div class="stat-label">
+                            Years of Experience
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            🎧
+                        </div>
+
+                        <div class="stat-value">
+                            24/7
+                        </div>
+
+                        <div class="stat-label">
+                            Support
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- CONNECT -->
+
+            <div class="connect-card">
+
+                <h3>
+                    Connect with QuickWrks
+                </h3>
+
+
+                <p>
+                    Have a library project in mind?
+                    Let's discuss how QuickWrks can help
+                    modernize your library operations.
+                </p>
+
+
+                <ul class="connect-list">
+
+                    <li>
+                        <span class="tick">✓</span>
+                        Custom Software Solutions
+                    </li>
+
+                    <li>
+                        <span class="tick">✓</span>
+                        Practical & Scalable Systems
+                    </li>
+
+                    <li>
+                        <span class="tick">✓</span>
+                        Ongoing Support
+                    </li>
+
+                </ul>
+
+
+                <a href="contact.html" class="btn-primary">
+                    Connect to QuickWrks →
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+
+            <div class="footer-brand">
+
+                <span class="logo-icon">
+                    Q
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        QuickWrks
+                    </strong>
+
+                    <span>
+                        Smart Solutions. Real Impact.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <ul class="footer-links">
+
+                <!-- <li>
+          <a href="#features">
+            Features
+          </a>
+        </li>
+
+        <li>
+          <a href="#dashboard">
+            System
+          </a>
+        </li>
+
+        <li>
+          <a href="#benefits">
+            Benefits
+          </a>
+        </li>
+
+        <li>
+          <a href="#why">
+            About Us
+          </a>
+        </li> -->
+
+            </ul>
+
+
+        </div>
+
+    </footer>
+
+
+    <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+    <script>
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        const menuToggle =
+            document.getElementById("menuToggle");
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+
+        menuToggle.addEventListener(
+            "click",
+            function () {
+
+                const isOpen =
+                    mobileMenu.classList.toggle("open");
+
+
+                document.body.classList.toggle(
+                    "menu-open",
+                    isOpen
+                );
+
+
+                menuToggle.textContent =
+                    isOpen ? "✕" : "☰";
+
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+
+                menuToggle.setAttribute(
+                    "aria-label",
+                    isOpen
+                        ? "Close menu"
+                        : "Open menu"
+                );
+
+            }
+        );
+
+
+        /* CLOSE MOBILE MENU */
+
+        mobileMenu
+            .querySelectorAll("a")
+            .forEach(
+                function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            mobileMenu.classList.remove(
+                                "open"
+                            );
+
+                            document.body.classList.remove(
+                                "menu-open"
+                            );
+
+                            menuToggle.textContent = "☰";
+
+                            menuToggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                            menuToggle.setAttribute(
+                                "aria-label",
+                                "Open menu"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           IMAGE → VIDEO
+        ========================================================= */
+
+        const heroVisual =
+            document.getElementById("heroVisual");
+
+        const heroMedia =
+            document.getElementById("heroMedia");
+
+        const knowMoreBtn =
+            document.getElementById("knowMoreBtn");
+
+        const libraryVideo =
+            document.getElementById("libraryVideo");
+
+
+        knowMoreBtn.addEventListener(
+            "click",
+            function () {
+
+
+                /*
+                  Change image into video.
+                */
+
+                heroMedia.classList.add(
+                    "video-active"
+                );
+
+
+                /*
+                  Hide the floating card while
+                  the video is playing.
+                */
+
+                heroVisual.classList.add(
+                    "video-playing"
+                );
+
+
+                /*
+                  Always start from the beginning.
+                */
+
+                libraryVideo.currentTime = 0;
+
+
+                /*
+                  Automatically play the video.
+                */
+
+                const playPromise =
+                    libraryVideo.play();
+
+
+                /*
+                  Prevent an unhandled error if
+                  the browser blocks playback.
+                */
+
+                if (
+                    playPromise !== undefined
+                ) {
+
+                    playPromise.catch(
+                        function (error) {
+
+                            console.warn(
+                                "Video could not start automatically:",
+                                error
+                            );
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           VIDEO FINISHED
+        ========================================================= */
+
+        libraryVideo.addEventListener(
+            "ended",
+            function () {
+
+
+                /*
+                  Stop playback.
+                */
+
+                libraryVideo.pause();
+
+
+                /*
+                  Reset video position.
+                */
+
+                libraryVideo.currentTime = 0;
+
+
+                /*
+                  Return to original image.
+                */
+
+                heroMedia.classList.remove(
+                    "video-active"
+                );
+
+
+                /*
+                  Show floating card again.
+                */
+
+                heroVisual.classList.remove(
+                    "video-playing"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           PAGE VISIBILITY
+        ========================================================= */
+
+        document.addEventListener(
+            "visibilitychange",
+            function () {
+
+                if (
+                    document.hidden &&
+                    !libraryVideo.paused
+                ) {
+
+                    libraryVideo.pause();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
