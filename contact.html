@@ -115,10 +115,34 @@
           <label>Business Name <span>*</span></label>
           <input type="text" placeholder="Enter your business name" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Phone Number <span>*</span></label>
           <input type="tel" placeholder="Enter your phone number" required>
-        </div>
+        </div> -->
+
+<div class="form-group">
+  <label>Phone Number <span>*</span></label>
+
+  <div class="phone-input">
+    <div class="country-code">
+      <span>+</span>
+      <input
+        type="tel"
+        name="country_code"
+        placeholder="91"
+        inputmode="numeric"
+        required>
+    </div>
+
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Enter your phone number"
+      inputmode="numeric"
+      required>
+  </div>
+</div>
+
         <div class="form-group">
           <label>Email Address <span>*</span></label>
           <input type="email" placeholder="Enter your email address" required>
