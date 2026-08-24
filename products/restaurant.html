@@ -1,219 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Restaurant Page – Developed by QuickWrks</title>
-  <meta name="description" content="Quickwrks is the leading provider of innovative digital solutions for your business." />
+
+  <meta name="description"
+    content="QuickWrks creates modern, powerful and easy-to-manage restaurant websites with online ordering, table reservations, menus, reviews and more.">
+
+  <meta name="robots" content="index, follow">
+
   <link rel="stylesheet" href="restaurant.css" />
-  <!-- <link rel="icon" href="/frontend/logo.png" type="image/x-icon" /> -->
+  <!-- <link rel="icon" href="QuickWrks-frontend/assets/logo.png" type="image/x-icon" /> -->
 </head>
+
+
 <body>
+
+
+  <!-- =========================================================
+       HEADER
+  ========================================================= -->
+
   <header>
+
     <nav class="nav">
-      <a href="index.html" class="logo">
+
+      <a href="index.html" class="logo" aria-label="QuickWrks Home">
+
         <span class="logo-icon">Q</span>
+
         <span class="logo-text">
           <strong>QuickWrks</strong>
           <span>Smart Solutions. Real Impact.</span>
         </span>
+
       </a>
+
+
       <ul class="nav-links">
-        <!-- <li><a href="index.html">Home</a></li> -->
-        <li><a href="#features">Services</a></li>
-        <li><a href="#features">Solutions</a></li>
-        <li><a href="#features">Industries</a></li>
-        <li><a href="#why">About Us</a></li>
-        <!-- <li><a href="contact.html">Contact Us</a></li> -->
+
+        <!-- <li>
+          <a href="#features">Services</a>
+        </li>
+
+        <li>
+          <a href="#features">Solutions</a>
+        </li>
+
+        <li>
+          <a href="#features">Industries</a>
+        </li>
+
+        <li>
+          <a href="#why">About Us</a>
+        </li> -->
+
       </ul>
-      <!-- <button class="btn-get-started" type="button">Get Started</button> -->
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+        ☰
+      </button>
+
     </nav>
+
+
+    <!-- MOBILE MENU -->
+
     <div class="mobile-menu" id="mobileMenu">
-      <!-- <a href="index.html">Home</a> -->
-      <a href="#features">Services</a>
+
+      <!-- <a href="#features">Services</a>
       <a href="#features">Solutions</a>
       <a href="#features">Industries</a>
-      <a href="#why">About Us</a>
-      <!-- <a href="contact.html">Contact Us</a> -->
-      <!-- <button class="btn-get-started" type="button" style="margin-top:0.5rem">Get Started</button> -->
+      <a href="#why">About Us</a> -->
+
     </div>
+
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-badge">🍴 RESTAURANT PAGE – DEVELOPED BY QUICKWRKS</div>
-      <h1>Restaurant Page<br>Developed by <span class="orange">QuickWrks</span></h1>
-      <p class="hero-desc">A powerful, modern and easy to manage restaurant page built by QuickWrks to help you serve better and grow faster.</p>
-      <div class="hero-checks">
-        <div class="check-item"><span class="tick">✓</span> Beautiful Menu Showcase</div>
-        <div class="check-item"><span class="tick">✓</span> Mobile Friendly Design</div>
-        <div class="check-item"><span class="tick">✓</span> Online Ordering Ready</div>
-        <div class="check-item"><span class="tick">✓</span> SEO Optimized</div>
-        <div class="check-item"><span class="tick">✓</span> Table Reservation</div>
-        <div class="check-item"><span class="tick">✓</span> Easy to Manage</div>
-      </div>
-      <div class="hero-btns">
-        <a href="contact.html"><button class="btn-primary" type="button">Connect to QuickWrks →</button></a>
-        <!-- <button class="btn-outline" type="button">▶ View Demo</button> -->
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-img">
-        <img
-          src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&h=600&fit=crop&q=80"
-          alt="Restaurant dish - grilled salmon"
-          loading="eager"
-        />
-      </div>
-      <div class="hero-float-card">
-        <div class="float-icon">🏅</div>
-        <div class="float-text">
-          <strong>Crafted with ❤️ by QuickWrks</strong>
-          <p>We build digital experiences that bring businesses and customers closer.</p>
+
+  <!-- =========================================================
+       HERO
+  ========================================================= -->
+
+  <main>
+
+    <section class="hero">
+
+
+      <!-- LEFT -->
+
+      <div class="hero-left">
+
+        <div class="hero-badge">
+          🍴 RESTAURANT PAGE – DEVELOPED BY QUICKWRKS
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="section-label">Built for Restaurants</div>
-    <h2 class="section-title">Everything You Need to Delight<br>Your Customers</h2>
-    <div class="section-underline"></div>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🍴</div>
-        <h3>Menu Showcase</h3>
-        <p>Display your food items beautifully with images, prices & categories.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🛒</div>
-        <h3>Online Ordering</h3>
-        <p>Enable customers to place orders online with ease.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📅</div>
-        <h3>Table Reservation</h3>
-        <p>Allow customers to book tables directly from your page.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3>Gallery Section</h3>
-        <p>Showcase your ambience, dishes & special moments.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⭐</div>
-        <h3>Reviews & Ratings</h3>
-        <p>Build trust with genuine customer reviews and ratings.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📞</div>
-        <h3>Contact & Location</h3>
-        <p>Make it easy for customers to reach you anytime.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA BANNER -->
-  <section class="cta-banner">
-    <div class="cta-inner">
-      <div class="cta-mockup">
-        <div class="laptop-frame">
-          <div class="laptop-screen">
-            <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop&q=80"
-              alt="Restaurant interior"
-              loading="lazy"
-            />
+        <h1>
+          Restaurant Page<br>
+          Developed by
+          <span class="orange">QuickWrks</span>
+        </h1>
+
+
+        <p class="hero-desc">
+          A powerful, modern and easy to manage restaurant page
+          built by QuickWrks to help you serve better and grow faster.
+        </p>
+
+
+        <div class="hero-checks">
+
+          <div class="check-item">
+            <span class="tick">✓</span>
+            Beautiful Menu Showcase
           </div>
-        </div>
-        <div class="floating-burger">
-          <img
-            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=200&fit=crop&q=80"
-            alt="Burger"
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <div class="cta-content">
-        <h2>Ready to take your restaurant online?</h2>
-        <p>Let QuickWrks build a stunning restaurant page for your business and help you attract more customers.</p>
-        <div class="cta-actions">
-          <a href="contact.html"><button class="btn-white" type="button">Connect to QuickWrks →</button></a>
-          <span class="cta-note">← Let's build something amazing together!</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- WHY + CONNECT -->
-  <section class="bottom-section" id="why">
-    <div class="why-block">
-      <div class="why-label">Why Choose QuickWrks?</div>
-      <h2 class="why-title">Your Growth, Our Mission</h2>
-      <p class="why-desc">We combine creativity, technology and strategy to deliver digital solutions that drive real results.</p>
-      <div class="stats-row">
-        <div class="stat-item">
-          <div class="stat-icon">👥</div>
-          <div class="stat-value">1000+</div>
-          <div class="stat-label">Happy Clients</div>
+          <div class="check-item">
+            <span class="tick">✓</span>
+            Mobile Friendly Design
+          </div>
+
+          <div class="check-item">
+            <span class="tick">✓</span>
+            Online Ordering Ready
+          </div>
+
+          <div class="check-item">
+            <span class="tick">✓</span>
+            SEO Optimized
+          </div>
+
+          <div class="check-item">
+            <span class="tick">✓</span>
+            Table Reservation
+          </div>
+
+          <div class="check-item">
+            <span class="tick">✓</span>
+            Easy to Manage
+          </div>
+
         </div>
-        <div class="stat-item">
-          <div class="stat-icon">📁</div>
-          <div class="stat-value">2500+</div>
-          <div class="stat-label">Projects Delivered</div>
+
+
+        <div class="hero-btns">
+
+          <a href="contact.html" class="btn-primary">
+            Connect to QuickWrks →
+          </a>
+
         </div>
-        <div class="stat-item">
-          <div class="stat-icon">🏅</div>
-          <div class="stat-value">5+</div>
-          <div class="stat-label">Years of Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-icon">🎧</div>
-          <div class="stat-value">24/7</div>
-          <div class="stat-label">Support</div>
-        </div>
+
       </div>
-    </div>
-    <div class="connect-card">
-      <h3>Connect with QuickWrks</h3>
-      <p>Have a project in mind? Let's discuss how we can help your restaurant grow online.</p>
-      <ul class="connect-list">
-        <li><span class="tick">✓</span> Custom Restaurant Pages</li>
-        <li><span class="tick">✓</span> Affordable Packages</li>
-        <li><span class="tick">✓</span> Ongoing Support</li>
-      </ul>
-      <a href="contact.html"><button class="btn-primary" type="button">Connect to QuickWrks →</button></a>
-    </div>
-  </section>
+
+
+      <!-- =====================================================
+           RIGHT IMAGE / VIDEO
+      ====================================================== -->
+
+      <div class="hero-visual" id="heroVisual">
+
+        <div class="hero-media" id="heroMedia">
+
+
+          <!-- ORIGINAL IMAGE -->
+
+          <div class="hero-img" id="heroImage">
+
+            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&h=800&fit=crop&q=85"
+              alt="Beautiful restaurant dish" loading="eager">
+
+
+            <!-- CENTER BUTTON -->
+
+            <button class="know-more-btn" id="knowMoreBtn" type="button" aria-label="Play restaurant video">
+              Know More
+            </button>
+
+          </div>
+
+
+          <!-- =================================================
+               VIDEO
+          ================================================== -->
+
+          <div class="hero-video" id="heroVideo">
+
+            <video id="restaurantVideo" controls playsinline preload="metadata"
+              aria-label="QuickWrks restaurant website demonstration video">
+
+              <!--
+                PUT YOUR VIDEO FILE HERE.
+
+                If restaurant-video.mp4 is in the SAME
+                folder as this HTML file, keep this:
+
+                restaurant-video.mp4
+
+                If your video is in a folder called "videos",
+                use:
+
+                videos/restaurant-video.mp4
+              -->
+
+              <source src="restaurant-video.mp4" type="video/mp4">
+
+              Your browser does not support HTML5 video.
+
+            </video>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- FLOATING CARD -->
+
+        <div class="hero-float-card" id="heroFloatCard">
+
+          <div class="float-icon">
+            🏅
+          </div>
+
+
+          <div class="float-text">
+
+            <strong>
+              Crafted with ❤️ by QuickWrks
+            </strong>
+
+            <p>
+              We build digital experiences that bring
+              businesses and customers closer.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FEATURES
+    ========================================================== -->
+
+    <section class="features" id="features">
+
+      <div class="section-label">
+        Built for Restaurants
+      </div>
+
+
+      <h2 class="section-title">
+        Everything You Need to Delight<br>
+        Your Customers
+      </h2>
+
+
+      <div class="section-underline"></div>
+
+
+      <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🍴
+          </div>
+
+          <h3>
+            Menu Showcase
+          </h3>
+
+          <p>
+            Display your food items beautifully with images,
+            prices & categories.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🛒
+          </div>
+
+          <h3>
+            Online Ordering
+          </h3>
+
+          <p>
+            Enable customers to place orders online with ease.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            📅
+          </div>
+
+          <h3>
+            Table Reservation
+          </h3>
+
+          <p>
+            Allow customers to book tables directly from your page.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🖼️
+          </div>
+
+          <h3>
+            Gallery Section
+          </h3>
+
+          <p>
+            Showcase your ambience, dishes & special moments.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            ⭐
+          </div>
+
+          <h3>
+            Reviews & Ratings
+          </h3>
+
+          <p>
+            Build trust with genuine customer reviews and ratings.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            📞
+          </div>
+
+          <h3>
+            Contact & Location
+          </h3>
+
+          <p>
+            Make it easy for customers to reach you anytime.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CTA
+    ========================================================== -->
+
+    <section class="cta-banner">
+
+      <div class="cta-inner">
+
+
+        <div class="cta-mockup">
+
+          <div class="laptop-frame">
+
+            <div class="laptop-screen">
+
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&h=450&fit=crop&q=85"
+                alt="Modern restaurant interior" loading="lazy">
+
+            </div>
+
+          </div>
+
+
+          <div class="floating-burger">
+
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&h=300&fit=crop&q=85"
+              alt="Restaurant burger" loading="lazy">
+
+          </div>
+
+        </div>
+
+
+        <div class="cta-content">
+
+          <h2>
+            Ready to take your restaurant online?
+          </h2>
+
+
+          <p>
+            Let QuickWrks build a stunning restaurant page
+            for your business and help you attract more customers.
+          </p>
+
+
+          <div class="cta-actions">
+
+            <a href="contact.html" class="btn-white">
+              Connect to QuickWrks →
+            </a>
+
+
+            <span class="cta-note">
+              ← Let's build something amazing together!
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         WHY QUICKWRKS
+    ========================================================== -->
+
+    <section class="bottom-section" id="why">
+
+
+      <div class="why-block">
+
+        <div class="why-label">
+          Why Choose QuickWrks?
+        </div>
+
+
+        <h2 class="why-title">
+          Your Growth, Our Mission
+        </h2>
+
+
+        <p class="why-desc">
+          We combine creativity, technology and strategy
+          to deliver digital solutions that drive real results.
+        </p>
+
+
+        <div class="stats-row">
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              👥
+            </div>
+
+            <div class="stat-value">
+              1000+
+            </div>
+
+            <div class="stat-label">
+              Happy Clients
+            </div>
+
+          </div>
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              📁
+            </div>
+
+            <div class="stat-value">
+              2500+
+            </div>
+
+            <div class="stat-label">
+              Projects Delivered
+            </div>
+
+          </div>
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              🏅
+            </div>
+
+            <div class="stat-value">
+              5+
+            </div>
+
+            <div class="stat-label">
+              Years of Experience
+            </div>
+
+          </div>
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              🎧
+            </div>
+
+            <div class="stat-value">
+              24/7
+            </div>
+
+            <div class="stat-label">
+              Support
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- CONNECT CARD -->
+
+      <div class="connect-card">
+
+        <h3>
+          Connect with QuickWrks
+        </h3>
+
+
+        <p>
+          Have a project in mind? Let's discuss how we can
+          help your restaurant grow online.
+        </p>
+
+
+        <ul class="connect-list">
+
+          <li>
+            <span class="tick">✓</span>
+            Custom Restaurant Pages
+          </li>
+
+          <li>
+            <span class="tick">✓</span>
+            Affordable Packages
+          </li>
+
+          <li>
+            <span class="tick">✓</span>
+            Ongoing Support
+          </li>
+
+        </ul>
+
+
+        <a href="contact.html" class="btn-primary">
+          Connect to QuickWrks →
+        </a>
+
+      </div>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
 
   <footer>
+
     <div class="footer-inner">
+
+
       <div class="footer-brand">
-        <span class="logo-icon">Q</span>
+
+        <span class="logo-icon">
+          Q
+        </span>
+
+
         <div>
-          <strong>QuickWrks</strong>
-          <span>Smart Solutions. Real Impact.</span>
+
+          <strong>
+            QuickWrks
+          </strong>
+
+          <span>
+            Smart Solutions. Real Impact.
+          </span>
+
         </div>
+
       </div>
-      <ul class="footer-links">
-        <!-- <li><a href="index.html">Home</a></li> -->
-        <li><a href="#features">Services</a></li>
-        <li><a href="#features">Solutions</a></li>
-        <li><a href="#why">About Us</a></li>
-        <!-- <li><a href="contact.html">Contact Us</a></li> -->
-      </ul>
-      <!-- <div class="footer-socials">
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="Instagram">ig</a>
-        <a href="#" aria-label="LinkedIn">in</a>
-        <a href="#" aria-label="YouTube">▶</a>
-      </div> -->
+
+
+      <!-- <ul class="footer-links">
+
+        <li>
+          <a href="#features">
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a href="#features">
+            Solutions
+          </a>
+        </li>
+
+        <li>
+          <a href="#why">
+            About Us
+          </a>
+        </li>
+
+      </ul> -->
+
+
     </div>
+
   </footer>
 
   <script src="restaurant.js"></script>
+
 </body>
+
 </html>
